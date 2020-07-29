@@ -21,8 +21,12 @@ export KUBECONFIG=./azurek8s
 kubectl get nodes
 
 k8s Web UI 
-
+```
  az aks browse --resource-group myResourceGroup --name myAKSCluster
+```
 
 
-
+ArgoCD
+```
+argocd proj create service -d https://kubernetes.default.svc,prod -s https://github.com/KKisilevsky/infra.git
+```
