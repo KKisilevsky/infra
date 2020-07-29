@@ -4,14 +4,14 @@ metadata:
   name: redis
   namespace: argocd
 spec:
-  project: redis
+  project: service
   source:
     repoURL: https://github.com/KKisilevsky/infra.git
     targetRevision: HEAD
     path: redis/prod
   destination:
     server: https://kubernetes.default.svc
-    namespace: dev
+    namespace: prod
   syncPolicy:
     automated:
       prune: true
