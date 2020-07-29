@@ -1,0 +1,3 @@
+resources:
+    - redis-master-deployment.yaml
+    - redis-svc.yaml
