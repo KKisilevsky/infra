@@ -9,6 +9,9 @@ spec:
       role: master
       tier: backend
   replicas: 2
+  syncPolicy:
+    automated:
+      selfHeal: true
   template:
     metadata:
       labels:
@@ -25,3 +28,4 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 6379
+
