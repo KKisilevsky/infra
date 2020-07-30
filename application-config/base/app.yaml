@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis
-  namespace: argocd
+  name: rba-app
+  namespace: argocd 
 spec:
-  project: service
+  destination:
+    namespace: dev
+    server: https://kubernetes.default.svc
+  project: tenant
   source:
+    path: vc-project/dev
     repoURL: https://github.com/KKisilevsky/infra.git
     targetRevision: HEAD
-    path: redis/prod
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: dev
   syncPolicy:
     automated:
       prune: true
-      selfHeal: true  
+      selfHeal: true

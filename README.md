@@ -30,3 +30,7 @@ ArgoCD
 ```
 argocd proj create service -d https://kubernetes.default.svc,prod -s https://github.com/KKisilevsky/infra.git
 ```
+
+Kubernetes
+
+kubectl create secret generic mssql --from-literal=SA_PASSWORD="v!rto_Labs!"
