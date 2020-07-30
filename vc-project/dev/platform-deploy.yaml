@@ -22,7 +22,7 @@ spec:
                 name: mssql
                 key: SA_PASSWORD
           - name: ConnectionStrings__VirtoCommerce
-            value: "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=$(VC_DBSERVER_PASSWORD);MultipleActiveResultSets=False;"
+            value: "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=$(VC_DBSERVER_PASSWORD);MultipleActiveResultSets=False;Connect Timeout=30;CommandTimeout=30;"
         ports:
         - containerPort: 80
         volumeMounts:
