@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: vc-platform-web      
-        image: docker.pkg.github.com/virtocommerce/vc-deploy-apps/platform-dev:81bae8dd950cbf10458303f912cb3ad6a2d1ac09
+        image: virtocommerce/platform:v3-preview6-dev
         env:
           - name: VC_DBSERVER_PASSWORD
             valueFrom:
