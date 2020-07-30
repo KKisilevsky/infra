@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: dev
     server: https://kubernetes.default.svc
-  project: tenant
+  project: redis
   source:
     path: vc-project/dev
     repoURL: https://github.com/KKisilevsky/infra.git
