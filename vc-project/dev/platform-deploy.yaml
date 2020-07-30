@@ -15,14 +15,14 @@ spec:
       containers:
       - name: vc-platform-web      
         image: virtocommerce/platform:v3-preview6-dev
-        env:
+        env: 
           - name: VC_DBSERVER_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mssql
                 key: SA_PASSWORD
           - name: ConnectionStrings__VirtoCommerce
-            value: "Server=tcp:vc-dev-dbserver.database.windows.net,1433;Database=$(VC_PLATFORM_SERVICE)_$(VC_NAMESPACE);User ID=virto@vc-dev-dbserver;Password=$(VC_DBSERVER_PASSWORD);Trusted_Connection=False;Encrypt=True;"
+            value: "Data Source=mssql;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=$(VC_DBSERVER_PASSWORD);MultipleActiveResultSets=False;"
         ports:
         - containerPort: 80
         volumeMounts:
