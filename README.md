@@ -34,3 +34,5 @@ argocd proj create service -d https://kubernetes.default.svc,prod -s https://git
 Kubernetes
 
 kubectl create secret generic mssql --from-literal=SA_PASSWORD="Password123" -n dev
+
+kubectl port-forward svc/platform -n dev 8070:80
