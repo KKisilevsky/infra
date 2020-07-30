@@ -4,7 +4,7 @@ metadata:
   name: mssql
   namespace: argocd
 spec:
-  project: service
+  project: redis
   source:
     repoURL: https://github.com/KKisilevsky/infra.git
     targetRevision: HEAD
