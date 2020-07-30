@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rba-app
+  name: platform
   namespace: argocd 
 spec:
   destination:

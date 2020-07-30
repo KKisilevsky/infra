@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform
+  template:
+    metadata:
+      labels:
+        app: platform
+    spec:
+      containers:
+      - name: vc-platform-web      
+        image: virtocommerce/platform:v3-latest
+        env:
+          - name: VC_DBSERVER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mssql
+                key: SA_PASSWORD
+          - name: ConnectionStrings__VirtoCommerce
+            value: "Server=tcp:vc-dev-dbserver.database.windows.net,1433;Database=$(VC_PLATFORM_SERVICE)_$(VC_NAMESPACE);User ID=virto@vc-dev-dbserver;Password=$(VC_DBSERVER_PASSWORD);Trusted_Connection=False;Encrypt=True;"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/opt/virtocommerce/platform/wwwroot/cms-content"
+          name: cms-content-data
+        - mountPath: "/opt/virtocommerce/platform/Modules"
+          name: modules-data
+      volumes:
+      - name: cms-content-data
+        persistentVolumeClaim:
+          claimName: cms-content-volume
+      - name: modules-data
+        emptyDir: {}
+        #persistentVolumeClaim:
+        #  claimName: modules-volume       
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
