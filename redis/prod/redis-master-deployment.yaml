@@ -30,21 +30,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: redispas
-              key: REDIS_PASSWORD
-      volumeMounts:
-        - mountPath: /redis-master-data
-          name: data
-        - mountPath: /redis-master
-          name: config
-      volumes:
-        - name: data
-          emptyDir: {}
-        - name: config
-          configMap:
-            name: redis-config
-            items:
-            - key: redis-config
-              path: redis.conf                  
+              key: REDIS_PASSWORD              
             
           
               
