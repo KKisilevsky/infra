@@ -16,7 +16,7 @@ spec:
         role: master
         tier: backend
     spec:
-      initcontainers:
+      initContainers:
       - name: init-redis
         image: redis:alpine
         command: ["/bin/bash", "-c", "redis-cli CONFIG SET requirepass $(REDIS_PASSWORD)"]
