@@ -31,7 +31,7 @@ spec:
             secretKeyRef:
               name: redispas
               key: REDIS_PASSWORD
-        command: ["redis-cli CONFIG SET requirepass $(REDIS_PASSWORD)"]        
+        command: ["/bin/bash", "-c", "redis-cli CONFIG SET requirepass $(REDIS_PASSWORD)"]        
               
             
               
