@@ -16,16 +16,6 @@ spec:
         role: master
         tier: backend
     spec:
-      initContainers:
-      - name: init-redis
-        image: redis:alpine
-        command: ["/bin/bash", "-c", "redis-cli CONFIG SET requirepass $(REDIS_PASSWORD)"]
-        env:
-        - name: REDIS_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: redispas
-              key: REDIS_PASSWORD  
       containers:
       - name: master
         image: redis:alpine #k8s.gcr.io/redis:e2e  # or just image: redis
@@ -34,7 +24,15 @@ spec:
             cpu: 100m
             memory: 100Mi
         ports:
-        - containerPort: 6379      
+        - containerPort: 6379 
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redispas
+              key: REDIS_PASSWORD
+        command: ["/bin/bash","-c"]
+        args: ["redis-cli CONFIG SET requirepass $(REDIS_PASSWORD)"]              
               
             
               
