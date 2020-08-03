@@ -27,9 +27,27 @@ k8s Web UI
 
 
 ArgoCD
+> Install
+
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
 ```
 argocd proj create service -d https://kubernetes.default.svc,prod -s https://github.com/KKisilevsky/infra.git
 ```
+
+
+> https://www.browserling.com/tools/bcrypt
+```
+kubectl -n argocd patch secret argocd-secret \
+  -p '{"stringData": {
+    "admin.password": "$2a$10$rRyBsGSHK6.uc8fntPwVIuLVHgsAhAX7TcdrqW/RADU0uh7CaChLa",
+    "admin.passwordMtime": "'$(date +%FT%T%Z)'"
+  }}'
+```
+
+argocd login SERVER:PORT
+
 
 Kubernetes
 
