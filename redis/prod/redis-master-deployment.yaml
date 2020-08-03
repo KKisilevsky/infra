@@ -24,15 +24,7 @@ spec:
             cpu: 100m
             memory: 100Mi
         ports:
-        - containerPort: 6379 
-        env:
-        - name: REDIS_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: redispas
-              key: REDIS_PASSWORD
-        command: ["/bin/sh"]
-        args: ["-c","redis-cli CONFIG SET requirepass $(REDIS_PASSWORD)"]                    
+        - containerPort: 6379
             
           
               
