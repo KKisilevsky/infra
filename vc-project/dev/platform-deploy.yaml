@@ -24,7 +24,7 @@ spec:
           - name: ConnectionStrings__VirtoCommerce
             value: "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=Password123;MultipleActiveResultSets=False;Connect Timeout=120"
           - name: ConnectionStrings__RedisConnectionString
-            value: "redis:6379,ssl=False,abortConnect=False"  
+            value: "redis-master.redis:6379,ssl=False,abortConnect=False"  
         ports:
         - containerPort: 80
         volumeMounts:
