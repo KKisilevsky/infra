@@ -18,19 +18,38 @@ spec:
     spec:
       containers:
       - name: master
-        image: redis:5.0.9-alpine #k8s.gcr.io/redis:e2e  # or just image: redis
+        image: redis:5.0.9 #k8s.gcr.io/redis:e2e  # or just image: redis
+        command:
+          - redis-server
+          - "/redis-master/redis.conf"
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
+        volumeMounts:
+        - mountPath: /redis-master-data
+          name: data
+        - mountPath: /redis-master
+          name: config    
         ports:
         - containerPort: 6379 
         env:
+        - name: MASTER
+          value: "true"  
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: redispas
-              key: REDIS_PASSWORD              
+              key: REDIS_PASSWORD
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: redis-config
+            items:
+            - key: redis-config
+              path: redis.conf                      
             
           
               
