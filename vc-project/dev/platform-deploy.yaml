@@ -21,10 +21,15 @@ spec:
               secretKeyRef:
                 name: mssql
                 key: SA_PASSWORD
+          - name: REDIS_PASS
+            valueFrom:
+              secretKeyRef:
+                name: redis
+                key: REDIS_PASS      
           - name: ConnectionStrings__VirtoCommerce
-            value: "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=Password123;MultipleActiveResultSets=False;Connect Timeout=120"
+            value: "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=$(VC_DBSERVER_PASSWORD);MultipleActiveResultSets=False;Connect Timeout=120"
           - name: ConnectionStrings__RedisConnectionString
-            value: "redis-master.redis:6379,ssl=False,abortConnect=False"  
+            value: "redis-master.redis:6379,password=$(REDIS_PASS),ssl=False,abortConnect=False"  
         ports:
         - containerPort: 80
         volumeMounts:
