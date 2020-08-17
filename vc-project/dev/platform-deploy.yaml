@@ -40,7 +40,7 @@ spec:
       volumes:
       - name: cms-content-data
         persistentVolumeClaim:
-          claimName: task-pv-volume
+          claimName: cms-pv-volume
       - name: modules-data
         emptyDir: {}
         #persistentVolumeClaim:
