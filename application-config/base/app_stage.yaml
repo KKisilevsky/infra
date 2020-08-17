@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform
+  namespace: argocd 
+spec:
+  destination:
+    namespace: stage
+    server: https://kubernetes.default.svc
+  project: redis
+  source:
+    path: vc-project/stage
+    repoURL: https://github.com/KKisilevsky/infra.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

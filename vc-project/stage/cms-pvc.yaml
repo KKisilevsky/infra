@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: modules-pv-volume
+  name: cms-pv-volume
 spec:
   accessModes:
   - ReadWriteMany
   storageClassName: manual
   resources:
     requests:
-      storage: 200Mi
+      storage: 100Mi
