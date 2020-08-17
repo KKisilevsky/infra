@@ -3,10 +3,10 @@ apiVersion: v1
 metadata:
   name: mssql-data
   annotations:
-    volume.beta.kubernetes.io/storage-class: azurefile
+    volume.beta.kubernetes.io/storage-class: px-shared-sc
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 4Gi
