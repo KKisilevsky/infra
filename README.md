@@ -35,7 +35,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 ```
 argocd proj create service -d https://kubernetes.default.svc,prod -s https://github.com/KKisilevsky/infra.git
 ```
-
+argocd proj add-destination redis https://kubernetes.default.svc stage
 
 > https://www.browserling.com/tools/bcrypt
 ```
