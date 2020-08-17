@@ -2,7 +2,7 @@ variable "client_id" {}
 variable "client_secret" {}
 
 variable "node_count" {
-    default = 3
+    default = 1
 }
 
 variable "ssh_public_key" {
