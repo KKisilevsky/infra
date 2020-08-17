@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: platform
+  name: stage-platform
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: platform
+      app: stage-platform
   template:
     metadata:
       labels:
-        app: platform
+        app: stage-platform
     spec:
       containers:
       - name: vc-platform-web      
