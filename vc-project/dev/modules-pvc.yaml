@@ -4,7 +4,7 @@ metadata:
   name: task-pv-volume
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   storageClassName: default
   resources:
     requests:
