@@ -43,8 +43,8 @@ spec:
           claimName: cms-pv-volume
       - name: modules-data
         emptyDir: {}
-        #persistentVolumeClaim:
-        #  claimName: modules-volume       
+        persistentVolumeClaim:
+          claimName: modules-pv-volume     
   strategy:
     rollingUpdate:
       maxSurge: 0
