@@ -42,7 +42,6 @@ spec:
         persistentVolumeClaim:
           claimName: cms-pv-volume
       - name: modules-data
-        emptyDir: {}
         persistentVolumeClaim:
           claimName: modules-pv-volume     
   strategy:
