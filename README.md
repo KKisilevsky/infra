@@ -37,6 +37,8 @@ argocd proj create service -d https://kubernetes.default.svc,prod -s https://git
 ```
 argocd proj add-destination redis https://kubernetes.default.svc stage
 
+argocd proj allow-cluster-resource redis "*" "*"
+
 > https://www.browserling.com/tools/bcrypt
 ```
 kubectl -n argocd patch secret argocd-secret \
