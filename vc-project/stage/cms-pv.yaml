@@ -11,4 +11,4 @@ spec:
   storageClassName: manual
   nfs:
     server: 10.240.0.4
-    path: /srv/nfs/data/stage-cms
+    path: /srv/nfs/data
