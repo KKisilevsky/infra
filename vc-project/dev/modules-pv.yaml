@@ -4,7 +4,7 @@ metadata:
   name: modules-pv-volume
 spec:
   capacity:
-    storage: 100Mi
+    storage: 200Mi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
