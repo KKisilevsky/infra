@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: my-nfs-share
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 1Gi

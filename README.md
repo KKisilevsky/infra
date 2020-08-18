@@ -56,3 +56,7 @@ Kubernetes
 kubectl create secret generic mssql --from-literal=SA_PASSWORD="Password123" -n dev
 
 kubectl port-forward svc/platform -n dev 8070:80
+
+kubectl get nodes -o wide
+
+kubectl exec -i -t aks-ssh-7649d749d-mz8bk -- /bin/bash

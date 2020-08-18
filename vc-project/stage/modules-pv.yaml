@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: stage-modules-pv-volume
-  labels:
-    type: local
+  name: stage-modules-pv-volume 
 spec:
-  storageClassName: manual
   capacity:
-    storage: 200Mi
+    storage: 100Mi
   accessModes:
     - ReadWriteMany
-  hostPath:
-    path: "/mnt/data"
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  nfs:
+    server: 10.240.0.4
+    path: /srv/nfs/data/stage-modules-pv-volume
