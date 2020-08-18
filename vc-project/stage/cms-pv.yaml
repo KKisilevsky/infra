@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: stage-cms-pv-volume
+  name: stage-cms
 spec:
   capacity:
     storage: 100Mi
@@ -11,4 +11,4 @@ spec:
   storageClassName: manual
   nfs:
     server: 10.240.0.4
-    path: /srv/nfs/data/stage-cms-pv-volume
+    path: /srv/nfs/data/stage-cms

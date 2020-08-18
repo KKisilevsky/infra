@@ -40,10 +40,10 @@ spec:
       volumes:
       - name: cms-content-data
         persistentVolumeClaim:
-          claimName: stage-cms-pv-volume
+          claimName: stage-cms
       - name: modules-data
         persistentVolumeClaim:
-          claimName: stage-modules-pv-volume     
+          claimName: stage-modules   
   strategy:
     rollingUpdate:
       maxSurge: 0
