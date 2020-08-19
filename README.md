@@ -53,7 +53,7 @@ argocd login SERVER:PORT
 
 Kubernetes
 
-kubectl create secret generic mssql --from-literal=SA_PASSWORD="Password123" -n dev
+kubectl create secret generic mssql --from-literal=SA_PASSWORD="*******" -n dev
 
 kubectl port-forward svc/platform -n dev 8070:80
 
