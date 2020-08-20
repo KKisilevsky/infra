@@ -55,3 +55,10 @@ spec:
       maxSurge: 0
       maxUnavailable: 1
     type: RollingUpdate
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app
+  labels:
+    app: vault-agent-dev
