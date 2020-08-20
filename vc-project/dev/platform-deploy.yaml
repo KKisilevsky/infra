@@ -25,8 +25,8 @@ spec:
       - name: vc-platform-web      
         image: virtocommerce/platform:v3-preview6-dev
         command:
-          - "/bin/bash"
-          - "-c"
+          - "/bin/sh"
+          - "-ec"
         args:
           - "source /vault/secrets/mssql"
           - "dotnet VirtoCommerce.Platform.Web.dll"
