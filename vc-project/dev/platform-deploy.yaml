@@ -28,7 +28,7 @@ spec:
           - "/bin/bash"
           - "-c"
         args:
-          - "dotnet VirtoCommerce.Platform.Web.dll && source /vault/secrets/mssql"
+          - "source /vault/secrets/mssql && dotnet VirtoCommerce.Platform.Web.dll"
         env: 
           - name: VC_DBSERVER_PASSWORD
             valueFrom:
