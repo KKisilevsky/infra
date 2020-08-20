@@ -14,7 +14,7 @@ spec:
         vault.hashicorp.com/agent-inject-secret-mssql: "secret/mssql"
         vault.hashicorp.com/agent-inject-template-mssql: |
           {{- with secret "secret/mssql" -}}
-          "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
+          export ConnectionStrings__VirtoCommerce="Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
           {{- end }}
         vault.hashicorp.com/role: "myapp"
       labels:
@@ -24,7 +24,7 @@ spec:
       containers:
       - name: vc-platform-web      
         image: virtocommerce/platform:v3-preview6-dev
-        args: ["sh", "-c", "export ConnectionStrings__VirtoCommerce=$(cat /vault/secrets/mssql) && dotnet VirtoCommerce.Platform.Web.dll"]
+        args: ["sh", "-c", "source /vault/secrets/mssql && dotnet VirtoCommerce.Platform.Web.dll"]
         env: 
           - name: VC_DBSERVER_PASSWORD
             valueFrom:
