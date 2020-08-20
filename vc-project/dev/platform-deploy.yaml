@@ -14,7 +14,7 @@ spec:
         vault.hashicorp.com/agent-inject-secret-mssql: "secret/mssql"
         vault.hashicorp.com/agent-inject-template-mssql: |
           {{- with secret "secret/mssql" -}}
-          export ConnectionStrings__VirtoCommerce="Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
+          Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120
           {{- end }}
         vault.hashicorp.com/role: "myapp"
       labels:
@@ -24,6 +24,12 @@ spec:
       containers:
       - name: vc-platform-web      
         image: virtocommerce/platform:v3-preview6-dev
+        command:
+           - "/bin/sh"
+           - "-ec"
+        args:
+           - "export ConnectionStrings__VirtoCommerce=$(cat /vault/secrets/mssql)"
+           - "dotnet VirtoCommerce.Platform.Web.dll"
         env: 
           - name: VC_DBSERVER_PASSWORD
             valueFrom:
@@ -35,8 +41,8 @@ spec:
               secretKeyRef:
                 name: redis
                 key: REDIS_PASS      
-          - name: ConnectionStrings__VirtoCommerce
-            value: vault:secret/mssql
+          # - name: ConnectionStrings__VirtoCommerce
+          #   value: "Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password=$(VC_DBSERVER_PASSWORD);MultipleActiveResultSets=False;Connect Timeout=120"
           - name: ConnectionStrings__RedisConnectionString
             value: "redis-master.redis:6379,password=$(REDIS_PASS),ssl=False,abortConnect=False"  
         ports:
