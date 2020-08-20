@@ -35,6 +35,8 @@ spec:
               secretKeyRef:
                 name: redis
                 key: REDIS_PASS      
+          - name: ConnectionStrings__VirtoCommerce
+            value: vault:secret/mssql
           - name: ConnectionStrings__RedisConnectionString
             value: "redis-master.redis:6379,password=$(REDIS_PASS),ssl=False,abortConnect=False"  
         ports:
