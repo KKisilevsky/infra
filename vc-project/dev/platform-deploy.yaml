@@ -61,4 +61,4 @@ kind: ServiceAccount
 metadata:
   name: app
   labels:
-    app: vault-agent-dev
+    app: platform
