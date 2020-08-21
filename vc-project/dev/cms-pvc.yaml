@@ -3,9 +3,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: cms-pv-volume
 spec:
+  storageClassName: "rook-nfs-share1"
   accessModes:
-  - ReadWriteMany
-  storageClassName: manual
+    - ReadWriteMany
   resources:
     requests:
       storage: 100Mi

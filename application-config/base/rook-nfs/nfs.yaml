@@ -18,6 +18,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteMany
+  storageClassName: local-storage
   resources:
     requests:
       storage: 1Gi
