@@ -42,10 +42,10 @@ spec:
         volumeMounts:
         - mountPath: "/opt/virtocommerce/platform/wwwroot/cms-content"
           name: cms-content-data
-          subPath: dev-cms-content-data
+          # subPath: dev-cms-content-data
         - mountPath: "/opt/virtocommerce/platform/Modules"
           name: modules-data
-          subPath: dev-modules-data
+          # subPath: dev-modules-data
       volumes:
       - name: cms-content-data
         persistentVolumeClaim:
