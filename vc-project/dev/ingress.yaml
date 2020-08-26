@@ -6,6 +6,10 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.org/client-max-body-size: 20m
 spec:
-  backend:
-    serviceName: plarform
-    servicePort: 80
+  rules:
+    - http:
+        paths:
+        - backend:
+            serviceName: platform
+            servicePort: 80
+          path: /
