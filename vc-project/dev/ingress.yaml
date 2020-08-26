@@ -7,9 +7,10 @@ metadata:
     nginx.org/client-max-body-size: 20m
 spec:
   rules:
-    - http:
-        paths:
-        - backend:
-            serviceName: platform
-            servicePort: 80
-          path: /
+  - host: platform.virtoway.com
+    http:
+      paths:
+      - backend:
+          serviceName: platform
+          servicePort: 80
+        path: /
