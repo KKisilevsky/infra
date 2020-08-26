@@ -7,7 +7,7 @@ metadata:
     nginx.org/client-max-body-size: 20m
 spec:
   rules:
-  - host: 52.174.194.67
+  # - host: 52.174.194.67
     http:
       paths:
       - backend:
