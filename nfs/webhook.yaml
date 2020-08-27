@@ -53,32 +53,32 @@ metadata:
 spec:
   selfSigned: {}
 ---
-apiVersion: admissionregistration.k8s.io/v1beta1
-kind: ValidatingWebhookConfiguration
-metadata:
-  annotations:
-    cert-manager.io/inject-ca-from: rook-nfs-system/rook-nfs-webhook-cert
-  creationTimestamp: null
-  name: rook-nfs-validating-webhook-configuration
-webhooks:
-- clientConfig:
-    caBundle: Cg==
-    service:
-      name: rook-nfs-webhook
-      namespace: rook-nfs-system
-      path: /validate-nfs-rook-io-v1alpha1-nfsserver
-  failurePolicy: Fail
-  name: validation.nfsserver.nfs.rook.io
-  rules:
-  - apiGroups:
-    - nfs.rook.io
-    apiVersions:
-    - v1alpha1
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - nfsservers
+# apiVersion: admissionregistration.k8s.io/v1beta1
+# kind: ValidatingWebhookConfiguration
+# metadata:
+#   annotations:
+#     cert-manager.io/inject-ca-from: rook-nfs-system/rook-nfs-webhook-cert
+#   creationTimestamp: null
+#   name: rook-nfs-validating-webhook-configuration
+# webhooks:
+# - clientConfig:
+#     caBundle: Cg==
+#     service:
+#       name: rook-nfs-webhook
+#       namespace: rook-nfs-system
+#       path: /validate-nfs-rook-io-v1alpha1-nfsserver
+#   failurePolicy: Fail
+#   name: validation.nfsserver.nfs.rook.io
+#   rules:
+#   - apiGroups:
+#     - nfs.rook.io
+#     apiVersions:
+#     - v1alpha1
+#     operations:
+#     - CREATE
+#     - UPDATE
+#     resources:
+#     - nfsservers
 ---
 kind: Service
 apiVersion: v1
