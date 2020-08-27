@@ -11,7 +11,7 @@ spec:
     path: nfs
   destination:
     server: https://kubernetes.default.svc
-    namespace: dev
+    namespace: rook-nfs-system
   syncPolicy:
     automated:
       prune: true
