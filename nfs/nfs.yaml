@@ -29,4 +29,5 @@ spec:
       claimName: nfs-default-claim
   # A key/value list of annotations
   annotations:
+    rook: nfs
   #  key: value
