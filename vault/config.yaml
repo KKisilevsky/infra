@@ -2,6 +2,8 @@ server:
     standalone:
       enabled: true
       config: |
+        ui = true 
+
         listener "tcp" {
           tls_disable = true
           address = "[::]:8200"
@@ -19,8 +21,15 @@ server:
       enabled: true
       size: 1Gi
       accessMode: ReadWriteOnce
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "nfs-client"
   
     auditStorage:
       enabled: true
       size: 1Gi
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "nfs-client"
       accessMode: ReadWriteOnce
+ui:
+  enabled: true
+  serviceType: ClusterIP     

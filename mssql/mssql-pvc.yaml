@@ -1,12 +1,24 @@
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: mssql-data
+#   annotations:
+#     volume.beta.kubernetes.io/storage-class: azurefile
+# spec:
+#   accessModes:
+#   - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: mssql-data
   annotations:
-    volume.beta.kubernetes.io/storage-class: azurefile
+    volume.beta.kubernetes.io/storage-class: "nfs-client"
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi

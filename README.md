@@ -59,6 +59,6 @@ kubectl port-forward svc/platform -n dev 8070:80
 
 kubectl get nodes -o wide
 
-kubectl exec -i -t aks-ssh-7649d749d-mz8bk -- /bin/bash
+kubectl exec -i -t aks-ssh-7649d749d-k9sc7 -- /bin/bash
 
 ssh -i id_rsa azureuser@10.240.0.4
