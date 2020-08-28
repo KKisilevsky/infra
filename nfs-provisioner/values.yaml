@@ -1,0 +1,6 @@
+nfs:
+    server: 10.240.0.4
+    path: /srv/nfs/data
+ 
+storageClass:
+    archiveOnDelete: false

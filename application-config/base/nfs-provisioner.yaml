@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-provisioner
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/KKisilevsky/infra.git
+    targetRevision: HEAD
+    path: nfs-provisioner
+    helm:
+        repoURL: https://kubernetes-charts.storage.googleapis.com/
+        chart: "nfs-client-provisioner"
+        chartVersion: "3.1.0"
+        valueFiles: ['values.yaml']
