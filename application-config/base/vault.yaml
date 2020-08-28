@@ -11,8 +11,4 @@ spec:
     path: vault
   destination:
     server: https://kubernetes.default.svc
-    namespace: hashicorp-vault
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true 
+    namespace: hashicorp-vault 

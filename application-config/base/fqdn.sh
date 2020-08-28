@@ -4,7 +4,7 @@
 IP=52.174.194.67
 
 # Name to associate with public IP address
-DNSNAME="aks-ingress-platform"
+DNSNAME="vault"
 
 # Get the resource-id of the public ip
 PUBLICIPID=$(az network public-ip list --query "[?ipAddress!=null]|[?contains(ipAddress, '$IP')].[id]" --output tsv)
