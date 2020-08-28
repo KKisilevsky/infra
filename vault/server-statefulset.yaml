@@ -161,9 +161,8 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
-
-        storageClass: vault-local-storage
       spec:
+        storageClass: vault-local-storage
         accessModes:
           - ReadWriteOnce
         resources:
