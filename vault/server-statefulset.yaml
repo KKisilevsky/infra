@@ -162,8 +162,7 @@ spec:
     - metadata:
         name: data
 
-        annotations:
-          volume.beta.kubernetes.io/storage-class: nfs-client
+        storageClass: vault-local-storage
       spec:
         accessModes:
           - ReadWriteOnce

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-vault-0
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "nfs-client"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  claimRef:
+    namespace: hashicorp-vault
+    name: data-vault-0
+  storageClassName: nfs-client 
