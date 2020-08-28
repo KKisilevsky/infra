@@ -14,3 +14,6 @@ spec:
         chart: "nfs-client-provisioner"
         chartVersion: "3.1.0"
         valueFiles: ['values.yaml']
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nfs    
