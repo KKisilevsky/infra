@@ -161,8 +161,10 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
+
+        annotations:
+          volume.beta.kubernetes.io/storage-class: nfs-client
       spec:
-        storageClass: vault-local-storage
         accessModes:
           - ReadWriteOnce
         resources:

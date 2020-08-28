@@ -20,9 +20,9 @@ server:
     dataStorage:
       enabled: true
       size: 1Gi
-      accessMode: ReadWriteOnce
       annotations:
         volume.beta.kubernetes.io/storage-class: "nfs-client"
+      accessMode: ReadWriteOnce
   
     auditStorage:
       enabled: true
