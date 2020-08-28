@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner-1598608233
+  labels:
+    app: nfs-client-provisioner
+    chart: nfs-client-provisioner-1.2.9
+    heritage: Helm
+    release: nfs-client-provisioner-1598608233
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+      release: nfs-client-provisioner-1598608233
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: nfs-client-provisioner
+        release: nfs-client-provisioner-1598608233
+    spec:
+      serviceAccountName: nfs-client-provisioner-1598608233
+      containers:
+        - name: nfs-client-provisioner
+          image: "quay.io/external_storage/nfs-client-provisioner:v3.1.0-k8s1.11"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: cluster.local/nfs-client-provisioner-1598608233
+            - name: NFS_SERVER
+              value: aks-nodepool-34239724-vmss000000
+            - name: NFS_PATH
+              value: /srv/nfs/data
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: aks-nodepool-34239724-vmss000000
+            path: /srv/nfs/data

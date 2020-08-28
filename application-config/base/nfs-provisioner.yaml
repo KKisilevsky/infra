@@ -9,11 +9,11 @@ spec:
     repoURL: https://github.com/KKisilevsky/infra.git
     targetRevision: HEAD
     path: nfs-provisioner
-    helm:
-        repoURL: https://kubernetes-charts.storage.googleapis.com/
-        chart: "nfs-client-provisioner"
-        chartVersion: "3.1.0"
-        valueFiles: ['values.yaml']
   destination:
     server: https://kubernetes.default.svc
-    namespace: nfs    
+    namespace: nfs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true  
+  
