@@ -34,7 +34,7 @@ spec:
           - "-c"
         args:
           # - "cat /vault/secrets/db >> /vault/secrets/config && cat /vault/secrets/redis >> /vault/secrets/config && source /vault/secrets/config && dotnet VirtoCommerce.Platform.Web.dll"
-          - "source /vault/secrets/db && dotnet VirtoCommerce.Platform.Web.dll"
+          - "cat /vault/secrets/db && source /vault/secrets/db && dotnet VirtoCommerce.Platform.Web.dll"
         # env:
         #   - name: REDIS_PASS
         #     valueFrom:
