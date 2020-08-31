@@ -11,10 +11,10 @@ spec:
     metadata:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-secret-config: "secret/mssqldb"
-        vault.hashicorp.com/agent-inject-template-config: |
+        vault.hashicorp.com/agent-inject-secret-mssqldb: "secret/mssqldb"
+        vault.hashicorp.com/agent-inject-template-mssqldb: |
           {{- with secret "secret/mssqldb" -}}
-          export ConnectionStrings__VirtoCommerce="Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
+          export ConnectionStrings__VirtoCommerce="Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
           {{- end }}
         vault.hashicorp.com/role: "myapp"
       labels:
