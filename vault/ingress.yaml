@@ -11,6 +11,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: vault
-          servicePort: 8200
+          serviceName: vault-ui
+          #servicePort: 8200
         path: /
