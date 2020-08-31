@@ -16,6 +16,6 @@ spec:
   publishNotReadyAddresses: true
   ports:
     - name: http
-      port: 8200
+      port: 80
       targetPort: 8200
   type: ClusterIP
