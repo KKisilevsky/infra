@@ -11,9 +11,9 @@ spec:
     metadata:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-secret-mssql-dev: "secret/mssql-dev"
-        vault.hashicorp.com/agent-inject-template-mssql-dev: |
-          {{- with secret "secret/mssql-dev" -}}
+        vault.hashicorp.com/agent-inject-secret-mssqldb: "secret/mssqldb"
+        vault.hashicorp.com/agent-inject-template-mssqldb: |
+          {{- with secret "secret/mssqldb" -}}
           export ConnectionStrings__VirtoCommerce="Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
           {{- end }}
         vault.hashicorp.com/role: "myapp"
@@ -28,7 +28,7 @@ spec:
           - "/bin/bash"
           - "-c"
         args:
-          - "source /vault/secrets/mssql && dotnet VirtoCommerce.Platform.Web.dll"
+          - "source /vault/secrets/mssqldb && dotnet VirtoCommerce.Platform.Web.dll"
         env:
           - name: REDIS_PASS
             valueFrom:
