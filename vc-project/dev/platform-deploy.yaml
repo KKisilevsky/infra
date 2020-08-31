@@ -11,9 +11,9 @@ spec:
     metadata:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-secret-mssql: "secret/mssql"
+        vault.hashicorp.com/agent-inject-secret-mssql: "secret/mssql-dev"
         vault.hashicorp.com/agent-inject-template-mssql: |
-          {{- with secret "secret/mssql" -}}
+          {{- with secret "secret/mssql-dev" -}}
           export ConnectionStrings__VirtoCommerce="Server=tcp:mssql-deployment,1433;;Initial Catalog=VirtoCommerce3docker;Persist Security Info=True;User ID=sa;Password={{ .Data.data.SA_PASSWORD }};MultipleActiveResultSets=False;Connect Timeout=120"
           {{- end }}
         vault.hashicorp.com/role: "myapp"
