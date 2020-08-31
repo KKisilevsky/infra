@@ -20,15 +20,17 @@ server:
     dataStorage:
       enabled: true
       size: 1Gi
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "nfs-client"
+      storageClass: azurefile
+      # annotations:
+      #   volume.beta.kubernetes.io/storage-class: "nfs-client"
       accessMode: ReadWriteOnce
   
     auditStorage:
       enabled: true
       size: 1Gi
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "nfs-client"
+      storageClass: azurefile
+      # annotations:
+      #   volume.beta.kubernetes.io/storage-class: "nfs-client"
       accessMode: ReadWriteOnce
 ui:
   enabled: true
