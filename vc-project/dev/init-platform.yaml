@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: minijob
-        image: python3
+        image: python:slim
         command:
             - "echo 1"
         volumeMounts:
