@@ -15,7 +15,11 @@ spec:
       containers:
       - name: minijob
         image: alpine
-        command: ["touch 1 /mnt/data"]
+        command:
+            - "/bin/bash"
+            - "-c"
+        args:
+            - "mkdir /mnt/data && touch test /mnt/data"
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
