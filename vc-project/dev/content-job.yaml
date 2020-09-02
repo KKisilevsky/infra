@@ -6,19 +6,16 @@ spec:
   backoffLimit: 5
   activeDeadlineSeconds: 600
   template:
-jobTemplate:
-  spec:
-    template:
-      spec:
-        containers:
-        - name: minijob
-          image: apline
-          command: ["touch 1 /mnt/data"]
-          volumeMounts:
-              - mountPath: "/mnt/data"
-                name: modules-data
-      volumes:
+    spec:
+      containers:
+      - name: minijob
+        image: apline
+        command: ["touch 1 /mnt/data"]
+        volumeMounts:
+            - mountPath: "/mnt/data"
+              name: modules-data
+      volume:
       - name: modules-data
         persistentVolumeClaim:
           claimName: modules-pv-volume
-          restartPolicy: Never
+      restartPolicy: Never
