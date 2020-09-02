@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: minijob
-        image: apline
+        image: alpine
         command: ["touch 1 /mnt/data"]
         volumeMounts:
             - mountPath: "/mnt/data"
