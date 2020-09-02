@@ -1,27 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: init-platform
+  name: uploader
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: platform
+      app: uploader
   template:
     metadata:
       labels:
-        app: platform
+        app: uploader
     spec:
-      initContainers:
-        - name: init-platform
-          image: alpine
-          command:
-            - "/bin/bash"
-            - "-c"
-          args:
-            - "touch test /mnt/data" 
-          volumeMounts:
-            - mountPath: /mnt/data
+      containers:
+      - name: minijob
+        image: apline
+        command: ["touch 1 /mnt/data"]
+        volumeMounts:
+            - mountPath: "/mnt/data"
               name: modules-data
       volumes:
       - name: cms-content-data
