@@ -14,8 +14,8 @@ spec:
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
-        volume:
-        - name: modules-data
-          persistentVolumeClaim:
-            claimName: modules-pv-volume
-      restartPolicy: Never
+      # volume:
+      # - name: modules-data
+      #   persistentVolumeClaim:
+      #     claimName: modules-pv-volume
+      # restartPolicy: Never
