@@ -18,4 +18,4 @@ spec:
       # - name: modules-data
       #   persistentVolumeClaim:
       #     claimName: modules-pv-volume
-      # restartPolicy: Never
+    restartPolicy: Never
