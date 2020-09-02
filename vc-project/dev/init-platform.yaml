@@ -19,7 +19,7 @@ spec:
             - "/bin/sh"
             - "-c"
         args:
-            - "mkdir /mnt/data && touch test /mnt/data"
+            - "touch test /mnt/data"
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
