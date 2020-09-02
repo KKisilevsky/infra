@@ -14,12 +14,9 @@ spec:
     spec:
       containers:
       - name: minijob
-        image: alpine
+        image: python3
         command:
-            - "/bin/sh"
-            - "-c"
-        args:
-            - "touch test /mnt/data"
+            - "echo 1"
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
