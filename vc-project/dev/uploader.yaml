@@ -26,12 +26,12 @@ metadata:
 spec:
     containers:
       - name: minijob
-        image: docker.pkg.github.com/virtocommerce/vc-deploy-containers/platform-installer:latest
+        image: alpine:slim
         command:
-          - "/bin/bash"
+          - "/bin/sh"
           - "-c"
         args:
-          - "python3 install-modules.py $(VC_PLATFORM_MODULES_CONFIG) /data"
+          - "cat $(VC_PLATFORM_MODULES_CONFIG)"
         volumeMounts:
         - name: modules-data
           mountPath: /data
