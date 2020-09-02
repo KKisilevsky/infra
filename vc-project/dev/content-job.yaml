@@ -5,6 +5,10 @@ metadata:
 spec:
   backoffLimit: 5
   activeDeadlineSeconds: 600
+  volumes:
+    - name: modules-data
+      persistentVolumeClaim:
+        claimName: modules-pv-volume
   template:
     spec:
       containers:
@@ -14,8 +18,4 @@ spec:
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
-    volumes:
-    - name: modules-data
-      persistentVolumeClaim:
-        claimName: modules-pv-volume
       restartPolicy: Never
