@@ -16,7 +16,7 @@ spec:
       - name: minijob
         image: python:slim
         command:
-            - "echo 1"
+            - "echo 11"
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
