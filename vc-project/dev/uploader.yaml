@@ -31,13 +31,13 @@ spec:
           - "/bin/sh"
           - "-c"
         args:
-          - "cat $(VC_PLATFORM_MODULES_CONFIG)"
+          - "sleep infinity"
         volumeMounts:
         - name: modules-data
           mountPath: /data
-        envFrom:
-          - configMapRef:
-              name: modules-cm 
+        # envFrom:
+        #   - configMapRef:
+        #       name: modules-cm 
     volumes:
      - name: modules-data
        persistentVolumeClaim:
