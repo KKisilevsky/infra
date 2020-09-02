@@ -15,8 +15,9 @@ spec:
       containers:
       - name: minijob
         image: python:slim
-        command:
-            - "python3 --version"
+        command: ["python3"]
+        args:
+            - "--version"   
         volumeMounts:
             - mountPath: "/mnt/data"
               name: modules-data
