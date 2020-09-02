@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: init-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform
+  template:
+    metadata:
+      labels:
+        app: platform
+    spec:
+      initContainers:
+        - name: init-platform
+          image: alpine
+          command:
+            - "/bin/bash"
+            - "-c"
+          args:
+            - "touch test /mnt/data" 
+          volumeMounts:
+            - mountPath: /mnt/data
+              name: modules-data
+      volumes:
+      - name: cms-content-data
+        persistentVolumeClaim:
+          claimName: cms-pv-volume
+      - name: modules-data
+        persistentVolumeClaim:
+          claimName: modules-pv-volume 
