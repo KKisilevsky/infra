@@ -22,22 +22,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-    name: uploader
+    name: dataaccess
 spec:
     containers:
-      - name: minijob
-        image: alpine:slim
-        command:
-          - "/bin/sh"
-          - "-c"
-        args:
-          - "sleep infinity"
+      - name: alpine
+        image: alpine:latest
+        command: ['sleep', 'infinity']
         volumeMounts:
         - name: modules-data
           mountPath: /data
-        # envFrom:
-        #   - configMapRef:
-        #       name: modules-cm 
     volumes:
      - name: modules-data
        persistentVolumeClaim:
