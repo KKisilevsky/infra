@@ -1,8 +1,6 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  annotations:
-    reloader.stakater.com/match: "true"
   name: modules-cm
 data:
   modules.json: |
@@ -15,7 +13,7 @@ data:
     {
       "Id": "VirtoCommerce.AzureSearch",
       "Repository": "VirtoCommerce/vc-module-azure-search",
-      "PackageUrl": "https://github.com/VirtoCommerce/vc-module-azure-search/releases/download/3.3.0/VirtoCommerce.AzureSearch_3.3.1.777.zip"
+      "PackageUrl": "https://github.com/VirtoCommerce/vc-module-azure-search/releases/download/3.3.0/VirtoCommerce.AzureSearch_3.3.1.555.zip"
     },
     {
       "Id": "VirtoCommerce.Cart",
