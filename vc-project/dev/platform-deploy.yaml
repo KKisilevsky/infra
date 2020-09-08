@@ -88,9 +88,9 @@ spec:
               name: modules-cm
               key: modules.json
         - name: CONFIG_HASH
-        valueFrom:
-            fieldRef:
-              fieldPath: spec.template.metadata.annotations.configHash           
+          valueFrom:
+              fieldRef:
+                fieldPath: spec.template.metadata.annotations.configHash           
       volumes:
       - name: cms-content-data
         persistentVolumeClaim:
