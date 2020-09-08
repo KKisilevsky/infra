@@ -23,7 +23,6 @@ spec:
           export ConnectionStrings__RedisConnectionString="redis-master.redis:6379,password={{ .Data.data.REDIS_PASS }},ssl=False,abortConnect=False"
           {{- end }}
         configmap.reloader.stakater.com/reload: "modules-cm"
-        #configHash: ""
       labels:
         app: platform
     spec:
@@ -87,11 +86,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: modules-cm
-              key: modules.json
-        # - name: CONFIG_HASH
-        #   valueFrom:
-        #       fieldRef:
-        #         fieldPath: spec.template.metadata.annotations.configHash           
+              key: modules.json        
       volumes:
       - name: cms-content-data
         persistentVolumeClaim:
