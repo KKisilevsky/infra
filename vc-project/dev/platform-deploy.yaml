@@ -22,6 +22,7 @@ spec:
           {{- with secret "secret_dev/redis" -}}
           export ConnectionStrings__RedisConnectionString="redis-master.redis:6379,password={{ .Data.data.REDIS_PASS }},ssl=False,abortConnect=False"
           {{- end }}
+        configHash: ""
       labels:
         app: platform
     spec:
