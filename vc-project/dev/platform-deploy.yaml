@@ -52,7 +52,7 @@ spec:
               name: cms-content-data
       containers:
       - name: vc-platform-web      
-        image: virtocommerce/platform:v3-preview6-dev
+        image: kkisilevsky/platform-dev
         command:
           - "/bin/bash"
           - "-c"
