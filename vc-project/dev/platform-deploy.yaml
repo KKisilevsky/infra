@@ -58,6 +58,10 @@ spec:
                 configMapKeyRef:
                   name: modules-cm
                   key: modules.json
+            - name: CONFIG_HASH
+              valueFrom:
+                  fieldRef:
+                    fieldPath: spec.template.metadata.annotations.configHash 
           volumeMounts:
             - mountPath: /opt/virtocommerce/platform/Modules
               name: modules-data
@@ -85,7 +89,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: modules-cm
-              key: modules.json  
+              key: modules.json      
       volumes:
       - name: cms-content-data
         persistentVolumeClaim:
