@@ -103,7 +103,7 @@ data:
     {
       "Id": "VirtoCommerce.Store",
       "Repository": "VirtoCommerce/vc-module-store",
-      "PackageUrl": "https://github.com/VirtoCommerce/vc-module-store/releases/download/3.2.0/VirtoCommerce.Store_3.2.0.zip"
+      "PackageUrl": "https://github.com/VirtoCommerce/vc-module-store/releases/download/3.2.0/VirtoCommerce.Store_3.222.0.zip"
     },
     {
       "Id": "VirtoCommerce.Subscription",
