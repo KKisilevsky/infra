@@ -29,9 +29,9 @@ spec:
       serviceAccountName: app
       initContainers:
         - name: init-platform
-          image: kkisilevsky/python-apline
+          image: docker.pkg.github.com/virtocommerce/vc-deploy-containers/platform-installer:latest
           command:
-            - "/bin/sh"
+            - "/bin/bash"
             - "-c"
           args:
             - "echo START INIT $(date +%Y-%m-%d-%H-%M-%S); 
