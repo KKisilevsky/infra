@@ -55,9 +55,9 @@ spec:
           #   - name: ASSETS_LOCATION
           #     value: /mnt/cms-content/assets
           volumeMounts:
-            - mountPath: /mnt/modules
+            - mountPath: /opt/virtocommerce/platform/wwwroot/cms-content
               name: modules-data
-            - mountPath: /mnt/cms-content
+            - mountPath: /opt/virtocommerce/platform/Modules
               name: cms-content-data
               # valueFrom:
               #   configMapKeyRef:
