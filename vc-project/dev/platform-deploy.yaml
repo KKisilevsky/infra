@@ -29,7 +29,7 @@ spec:
       serviceAccountName: app
       initContainers:
         - name: init-platform
-          image: docker.pkg.github.com/virtocommerce/vc-deploy-containers/platform-installer:latest
+          image: kkisilevsky/platform-dev
           command:
             - "/bin/bash"
             - "-c"
