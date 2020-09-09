@@ -29,7 +29,7 @@ spec:
       serviceAccountName: app
       initContainers:
         - name: init-platform
-          image: kkisilevsky/platform-dev
+          image: kkisilevsky/platform-installer
           command:
             - "/bin/bash"
             - "-c"
