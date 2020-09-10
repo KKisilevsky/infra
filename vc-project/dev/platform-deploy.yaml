@@ -32,11 +32,11 @@ spec:
           image: kkisilevsky/python-apline
           resources:
             limits:
-              cpu: "2"
-              memory: 2Gi
+              cpu: "1.5"
+              memory: 1.5Gi
             requests:
-              cpu: "2000m"
-              memory: 2Gi
+              cpu: "1500m"
+              memory: 1.5Gi
           command:
             - "/bin/sh"
             - "-c"
