@@ -29,13 +29,14 @@ spec:
       serviceAccountName: app
       initContainers:
         - name: init-platform
-          image: kkisilevsky/platform-installer
+          image: kkisilevsky/python-apline
           command:
-            - "/bin/bash"
+            - "/bin/sh"
             - "-c"
           args:
             - "echo START INIT $(date +%Y-%m-%d-%H-%M-%S); 
-            python3 install-modules.py $(VC_PLATFORM_MODULES_CONFIG) /opt/virtocommerce/platform/Modules;"
+            python3 install-modules.py $(VC_PLATFORM_MODULES_CONFIG) /opt/virtocommerce/platform/Modules;
+            touch testfile /opt/virtocommerce/platform/wwwroot/cms-content"
             # rm -rf $(ELECTRONICS_THEME_LOCATION)/* && /install-theme.sh $(ELECTRONICS_THEME_URL) $(ELECTRONICS_THEME_LOCATION);
             # rm -rf $(B2B_THEME_LOCATION)/* && /install-theme.sh $(B2B_THEME_URL) $(B2B_THEME_LOCATION);
             # /upload-assets.sh $(ASSETS_URL) $(ASSETS_LOCATION);"
@@ -81,7 +82,7 @@ spec:
         - mountPath: "/opt/virtocommerce/platform/Modules"
           name: modules-data
         env:  
-        - name: APP_CONFIG
+        - name: MODULES_CONFIG
           valueFrom:
             configMapKeyRef:
               name: modules-cm
