@@ -36,7 +36,6 @@ spec:
           args:
             - "echo START INIT $(date +%Y-%m-%d-%H-%M-%S); 
             python3 install-modules.py $(VC_PLATFORM_MODULES_CONFIG) /opt/virtocommerce/platform/Modules/;
-            touch testfile /opt/virtocommerce/platform/wwwroot/cms-content/;
             rm -rf $(ELECTRONICS_THEME_LOCATION)/* && /install-theme.sh $(ELECTRONICS_THEME_URL) $(ELECTRONICS_THEME_LOCATION)"
             # rm -rf $(B2B_THEME_LOCATION)/* && /install-theme.sh $(B2B_THEME_URL) $(B2B_THEME_LOCATION);
             # /upload-assets.sh $(ASSETS_URL) $(ASSETS_LOCATION);"
@@ -46,7 +45,7 @@ spec:
             - name: ELECTRONICS_THEME_URL
               value: https://vc3prerelease.blob.core.windows.net/packages/vc-theme-default-2.1.11.zip
             - name: ELECTRONICS_THEME_LOCATION
-              value: /mnt/cms-content/Themes/Electronics/default
+              value: /mnt/cms-content/Themes/Electronics/default/
           #   - name: B2B_THEME_URL
           #     value: https://github.com/VirtoCommerce/vc-theme-b2b/releases/download/3.0.7/vc-b2b-theme-3.0.7.zip
           #   - name: B2B_THEME_LOCATION
@@ -56,9 +55,9 @@ spec:
           #   - name: ASSETS_LOCATION
           #     value: /mnt/cms-content/assets
           volumeMounts:
-            - mountPath: /opt/virtocommerce/platform/wwwroot/cms-content
-              name: modules-data
             - mountPath: /opt/virtocommerce/platform/Modules
+              name: modules-data
+            - mountPath: /opt/virtocommerce/platform/cms-content
               name: cms-content-data
               # valueFrom:
               #   configMapKeyRef:
