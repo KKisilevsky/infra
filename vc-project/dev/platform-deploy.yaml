@@ -31,9 +31,11 @@ spec:
         - name: init-platform
           image: kkisilevsky/python-apline
           resources:
+            limits:
+              cpu: "1.5"
             requests:
-              cpu: "2"
-              memory: 2Gi
+              cpu: "1000m"
+              memory: 1Gi
           command:
             - "/bin/sh"
             - "-c"
