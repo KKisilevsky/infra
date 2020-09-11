@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: platform
 spec:
@@ -35,34 +35,19 @@ spec:
             - "-c"
           args:
             - "echo START INIT $(date +%Y-%m-%d-%H-%M-%S); 
-            python3 install-modules.py $(VC_PLATFORM_MODULES_CONFIG) /mnt/Modules/;
             rm -rf $(ELECTRONICS_THEME_LOCATION)* && /install-theme.sh $(ELECTRONICS_THEME_URL) $(ELECTRONICS_THEME_LOCATION);
             echo ELECTRONICS THEME INSTALLED $(date +%Y-%m-%d-%H-%M-%S);
             rm -rf $(B2B_THEME_LOCATION)* && /install-theme.sh $(B2B_THEME_URL) $(B2B_THEME_LOCATION);
-            echo B2B THEME INSTALLED $(date +%Y-%m-%d-%H-%M-%S);
-            python3 upload-assets.py $(ASSETS_URL) $(ASSETS_LOCATION);
-            echo ASSETS INSTALLED $(date +%Y-%m-%d-%H-%M-%S);"
+            echo B2B THEME INSTALLED $(date +%Y-%m-%d-%H-%M-%S);"
+            #python3 upload-assets.py $(ASSETS_URL) $(ASSETS_LOCATION);
+            #echo ASSETS INSTALLED $(date +%Y-%m-%d-%H-%M-%S);"
+            #python3 install-modules.py $(VC_PLATFORM_MODULES_CONFIG) /mnt/Modules/
           envFrom:
             - configMapRef:
                 name: platform-cm 
-          # env:
-          #   - name: VC_PLATFORM_MODULES_CONFIG
-          #     value: https://raw.githubusercontent.com/VirtoCommerce/vc-deploy-apps/master/rba-app/overlays/dev/modules.json?BA2F41C0D1FD486CB031B79A2573693E35BA60C8F2686C5863B9DC9D340E4A9C
-          #   - name: ELECTRONICS_THEME_URL
-          #     value: https://vc3prerelease.blob.core.windows.net/packages/vc-theme-default-2.1.11.zip
-          #   - name: ELECTRONICS_THEME_LOCATION
-          #     value: /mnt/cms-content/Themes/Electronics/default/
-          #   - name: B2B_THEME_URL
-          #     value: https://github.com/VirtoCommerce/vc-theme-b2b/releases/download/3.0.7/vc-b2b-theme-3.0.7.zip
-          #   - name: B2B_THEME_LOCATION
-          #     value: /mnt/cms-content/Themes/B2B-store/default
-          #   - name: ASSETS_URL
-          #     value: https://vcbacpac.blob.core.windows.net/dac-packages/rba_assets.zip
-          #   - name: ASSETS_LOCATION
-          #     value: /mnt/cms-content/assets
           volumeMounts:
-            - mountPath: /mnt/Modules
-              name: modules-data
+            # - mountPath: /mnt/Modules
+            #   name: modules-data
             - mountPath: /mnt/cms-content
               name: cms-content-data
               # valueFrom:
@@ -84,20 +69,29 @@ spec:
         volumeMounts:
         - mountPath: "/opt/virtocommerce/platform/wwwroot/cms-content"
           name: cms-content-data
-        - mountPath: "/opt/virtocommerce/platform/Modules"
-          name: modules-data
+        # - mountPath: "/opt/virtocommerce/platform/Modules"
+        #   name: modules-data
         env:  
         - name: MODULES_CONFIG
           valueFrom:
             configMapKeyRef:
               name: platform-cm
-              key: modules.json        
-      volumes:
-      - name: cms-content-data
-        persistentVolumeClaim:
-          claimName: cms-pv-volume
-      - name: modules-data
-        emptyDir: {}
+              key: modules.json
+  volumeClaimTemplates:
+    - metadata:
+        name: cms-content-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: longhorn  
+        resources:
+          requests:
+            storage: 200Mi                   
+      # volumes:
+      # - name: cms-content-data
+      #   persistentVolumeClaim:
+      #     claimName: cms-pv-volume
+      # - name: modules-data
+      #   emptyDir: {}
         # persistentVolumeClaim:
         #   claimName: modules-pv-volume     
   strategy:
