@@ -17,7 +17,7 @@ metadata:
   #   volume.beta.kubernetes.io/storage-class: "nfs-client"
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: longhorn  
   resources:
     requests:
