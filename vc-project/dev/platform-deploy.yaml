@@ -3,6 +3,7 @@ kind: StatefulSet
 metadata:
   name: platform
 spec:
+  serviceName: platform
   replicas: 3
   selector:
     matchLabels:
@@ -94,11 +95,11 @@ spec:
       #   emptyDir: {}
         # persistentVolumeClaim:
         #   claimName: modules-pv-volume     
-  strategy:
-    rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
-    type: RollingUpdate
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 0
+  #     maxUnavailable: 1
+  #   type: RollingUpdate
 ---
 apiVersion: v1
 kind: ServiceAccount
