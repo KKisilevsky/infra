@@ -2,11 +2,12 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: cms-pv-volume
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "nfs-client"
+  # annotations:
+  #   volume.beta.kubernetes.io/storage-class: "nfs-client"
 spec:
   accessModes:
     - ReadWriteMany
+  storageClassName: longhorn   
   resources:
     requests:
       storage: 100Mi
