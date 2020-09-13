@@ -78,6 +78,9 @@ spec:
             configMapKeyRef:
               name: platform-cm
               key: modules.json
+      volumes:
+        - name: modules-data
+          emptyDir: {}     
   volumeClaimTemplates:
     - metadata:
         name: cms-content-data
@@ -87,12 +90,12 @@ spec:
         resources:
           requests:
             storage: 200Mi                   
-      volumes:
+      # volumes:
       # - name: cms-content-data
       #   persistentVolumeClaim:
       #     claimName: cms-pv-volume
-      - name: modules-data
-        emptyDir: {}
+      # - name: modules-data
+      #   emptyDir: {}
         # persistentVolumeClaim:
         #   claimName: modules-pv-volume     
   # strategy:
