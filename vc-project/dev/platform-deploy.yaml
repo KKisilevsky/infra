@@ -47,8 +47,8 @@ spec:
             - configMapRef:
                 name: platform-cm 
           volumeMounts:
-            # - mountPath: /mnt/Modules
-            #   name: modules-data
+            - mountPath: /mnt/Modules
+              name: modules-data
             - mountPath: /mnt/cms-content
               name: cms-content-data
               # valueFrom:
@@ -70,8 +70,8 @@ spec:
         volumeMounts:
         - mountPath: "/opt/virtocommerce/platform/wwwroot/cms-content"
           name: cms-content-data
-        # - mountPath: "/opt/virtocommerce/platform/Modules"
-        #   name: modules-data
+        - mountPath: "/opt/virtocommerce/platform/Modules"
+          name: modules-data
         env:  
         - name: MODULES_CONFIG
           valueFrom:
@@ -87,12 +87,12 @@ spec:
         resources:
           requests:
             storage: 200Mi                   
-      # volumes:
+      volumes:
       # - name: cms-content-data
       #   persistentVolumeClaim:
       #     claimName: cms-pv-volume
-      # - name: modules-data
-      #   emptyDir: {}
+      - name: modules-data
+        emptyDir: {}
         # persistentVolumeClaim:
         #   claimName: modules-pv-volume     
   # strategy:
