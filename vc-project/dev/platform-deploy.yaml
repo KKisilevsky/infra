@@ -81,7 +81,6 @@ spec:
               key: modules.json
       volumes:
         - name: modules-data
-          emptyDir: {}
           persistentVolumeClaim:
             claimName: modules-pv-volume     
   volumeClaimTemplates:
