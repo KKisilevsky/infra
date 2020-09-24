@@ -1,30 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: monitoring-new
   namespace: argocd  
 spec:
-  destination:
-    namespace: monitoring
-    server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: https://github.com/KKisilevsky/infra.git
-    targetRevision: HEAD
-    path: monitoring
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    targetRevision: 9.4.4
     helm:
-        repoURL: https://prometheus-community.github.io/helm-charts
-        chart: "kube-prometheus-stack"
-        chartVersion: "9.4.3"
-        version: v3
-        # parameters:
-        #     - name: app
-        #       value: $ARGOCD_APP_NAME
-
-    # repoURL: 'https://prometheus-community.github.io/helm-charts'
-    # targetRevision: 9.4.2
-    # chart: kube-prometheus-stack
-#   syncPolicy:
-#     automated:
-#         prune: true
-#         selfHeal: true 
+        parameters:
+        - name: validatingwebhookconfiguration
+          value: 'true'
+    chart: kube-prometheus-stack
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring
+  syncPolicy: {}
