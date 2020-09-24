@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: nginx
+  name: grafana
 spec:
   rules:
   - host: aks-ingress-platform.westeurope.cloudapp.azure.com
