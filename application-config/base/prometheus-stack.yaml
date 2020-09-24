@@ -14,8 +14,6 @@ spec:
           value: 'false'
         - name: prometheusOperator.tlsProxy.enabled
           value: 'false'
-        - name: prometheusOperator.createCustomResource
-          value: 'false'
     chart: kube-prometheus-stack
   destination:
     server: 'https://kubernetes.default.svc'
