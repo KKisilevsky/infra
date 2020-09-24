@@ -2,15 +2,12 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: nginx
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.org/client-max-body-size: 20m
 spec:
   rules:
   - host: aks-ingress-platform.westeurope.cloudapp.azure.com
     http:
       paths:
       - backend:
-          serviceName: vault-ui
+          serviceName: prometheus-stack.prometheus-stack-grafana
           servicePort: 80
         path: /
