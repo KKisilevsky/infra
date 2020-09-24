@@ -1,15 +1,15 @@
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/podsecuritypolicy.yaml
+# Source: prometheus-operator/charts/grafana/templates/podsecuritypolicy.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default'
@@ -53,17 +53,17 @@ spec:
     rule: 'RunAsAny'
   readOnlyRootFilesystem: false
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/tests/test-podsecuritypolicy.yaml
+# Source: prometheus-operator/charts/grafana/templates/tests/test-podsecuritypolicy.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   allowPrivilegeEscalation: true
@@ -86,16 +86,16 @@ spec:
   - projected
   - secret
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/podsecuritypolicy.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/podsecuritypolicy.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+  name: prometheus-kube-state-metrics
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.8.14
+    helm.sh/chart: kube-state-metrics-2.8.10
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
+    app.kubernetes.io/instance: prometheus
 spec:
   privileged: false
   volumes:
@@ -121,17 +121,17 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 ---
-# Source: kube-prometheus-stack/charts/prometheus-node-exporter/templates/psp.yaml
+# Source: prometheus-operator/charts/prometheus-node-exporter/templates/psp.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: prometheus-prometheus-node-exporter
   namespace: monitoring
   labels:     
     app: prometheus-node-exporter
     heritage: Helm
-    release: kube-prometheus-stack-1600767579
-    chart: prometheus-node-exporter-1.11.2
+    release: prometheus
+    chart: prometheus-node-exporter-1.10.0
     jobLabel: node-exporter
 spec:
   privileged: false
@@ -176,16 +176,16 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/psp.yaml
+# Source: prometheus-operator/templates/alertmanager/psp.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   privileged: false
@@ -226,16 +226,16 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/psp.yaml
+# Source: prometheus-operator/templates/prometheus-operator/psp.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   privileged: false
@@ -276,16 +276,16 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 ---
-# Source: kube-prometheus-stack/templates/prometheus/psp.yaml
+# Source: prometheus-operator/templates/prometheus/psp.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   privileged: false
@@ -326,116 +326,116 @@ spec:
         max: 65535
   readOnlyRootFilesystem: false
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/serviceaccount.yaml
+# Source: prometheus-operator/charts/grafana/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/tests/test-serviceaccount.yaml
+# Source: prometheus-operator/charts/grafana/templates/tests/test-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
   namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/serviceaccount.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.8.14
+    helm.sh/chart: kube-state-metrics-2.8.10
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+    app.kubernetes.io/instance: prometheus
+  name: prometheus-kube-state-metrics
   namespace: monitoring
 imagePullSecrets:
   []
 ---
-# Source: kube-prometheus-stack/charts/prometheus-node-exporter/templates/serviceaccount.yaml
+# Source: prometheus-operator/charts/prometheus-node-exporter/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: prometheus-prometheus-node-exporter
   namespace: monitoring
   labels:
     app: prometheus-node-exporter
-    chart: prometheus-node-exporter-1.11.2
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-node-exporter-1.10.0
+    release: "prometheus"
     heritage: "Helm"
 imagePullSecrets:
   []
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/serviceaccount.yaml
+# Source: prometheus-operator/templates/alertmanager/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 imagePullSecrets:
   []
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/serviceaccount.yaml
+# Source: prometheus-operator/templates/prometheus-operator/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 imagePullSecrets:
   []
 ---
-# Source: kube-prometheus-stack/templates/prometheus/serviceaccount.yaml
+# Source: prometheus-operator/templates/prometheus/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 imagePullSecrets:
   []
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/secret.yaml
+# Source: prometheus-operator/charts/grafana/templates/secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 type: Opaque
 data:
@@ -443,32 +443,32 @@ data:
   admin-password: "cHJvbS1vcGVyYXRvcg=="
   ldap-toml: ""
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/secret.yaml
+# Source: prometheus-operator/templates/alertmanager/secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: alertmanager-kube-prometheus-stack-1600-alertmanager
+  name: alertmanager-prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   alertmanager.yaml: "Z2xvYmFsOgogIHJlc29sdmVfdGltZW91dDogNW0KcmVjZWl2ZXJzOgotIG5hbWU6ICJudWxsIgpyb3V0ZToKICBncm91cF9ieToKICAtIGpvYgogIGdyb3VwX2ludGVydmFsOiA1bQogIGdyb3VwX3dhaXQ6IDMwcwogIHJlY2VpdmVyOiAibnVsbCIKICByZXBlYXRfaW50ZXJ2YWw6IDEyaAogIHJvdXRlczoKICAtIG1hdGNoOgogICAgICBhbGVydG5hbWU6IFdhdGNoZG9nCiAgICByZWNlaXZlcjogIm51bGwi"
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/configmap-dashboard-provider.yaml
+# Source: prometheus-operator/charts/grafana/templates/configmap-dashboard-provider.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
-  name: kube-prometheus-stack-1600767579-grafana-config-dashboards
+  name: prometheus-grafana-config-dashboards
   namespace: monitoring
 data:
   provider.yaml: |-
@@ -481,20 +481,19 @@ data:
       disableDeletion: false
       allowUiUpdates: false
       options:
-        foldersFromFilesStructure: false
         path: /tmp/dashboards
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/configmap.yaml
+# Source: prometheus-operator/charts/grafana/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 data:
   grafana.ini: |
@@ -510,39 +509,39 @@ data:
     plugins = /var/lib/grafana/plugins
     provisioning = /etc/grafana/provisioning
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/tests/test-configmap.yaml
+# Source: prometheus-operator/charts/grafana/templates/tests/test-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 data:
   run.sh: |-
     @test "Test Health" {
-      url="http://kube-prometheus-stack-1600767579-grafana/api/health"
+      url="http://prometheus-grafana/api/health"
 
       code=$(wget --server-response --spider --timeout 10 --tries 1 ${url} 2>&1 | awk '/^  HTTP/{print $2}')
       [ "$code" == "200" ]
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/configmaps-datasources.yaml
+# Source: prometheus-operator/templates/grafana/configmaps-datasources.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kube-prometheus-stack-1600-grafana-datasource
+  name: prometheus-prometheus-oper-grafana-datasource
   namespace: monitoring
   labels:
     grafana_datasource: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   datasource.yaml: |-
@@ -550,24 +549,24 @@ data:
     datasources:
     - name: Prometheus
       type: prometheus
-      url: http://kube-prometheus-stack-1600-prometheus:9090/
+      url: http://prometheus-prometheus-oper-prometheus:9090/
       access: proxy
       isDefault: true
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/apiserver.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/apiserver.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-apiserver
+  name: prometheus-prometheus-oper-apiserver
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   apiserver.json: |-
@@ -2283,20 +2282,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/cluster-total.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/cluster-total.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-cluster-total
+  name: prometheus-prometheus-oper-cluster-total
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   cluster-total.json: |-
@@ -4119,20 +4118,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/controller-manager.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/controller-manager.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-controller-manager
+  name: prometheus-prometheus-oper-controller-manager
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   controller-manager.json: |-
@@ -5256,20 +5255,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/etcd.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/etcd.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-etcd
+  name: prometheus-prometheus-oper-etcd
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   etcd.json: |-
@@ -6367,20 +6366,20 @@ data:
         "version": 215
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-coredns.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-coredns.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-coredns
+  name: prometheus-prometheus-oper-k8s-coredns
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-coredns.json: |-
@@ -7708,20 +7707,20 @@ data:
         "version": 1
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-resources-cluster.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-resources-cluster.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-resources-cluster
+  name: prometheus-prometheus-oper-k8s-resources-cluster
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-resources-cluster.json: |-
@@ -10285,20 +10284,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-resources-namespace.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-resources-namespace.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-resources-namespace
+  name: prometheus-prometheus-oper-k8s-resources-namespace
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-resources-namespace.json: |-
@@ -12566,20 +12565,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-resources-node.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-resources-node.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-resources-node
+  name: prometheus-prometheus-oper-k8s-resources-node
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-resources-node.json: |-
@@ -13539,20 +13538,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-resources-pod.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-resources-pod.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-resources-pod
+  name: prometheus-prometheus-oper-k8s-resources-pod
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-resources-pod.json: |-
@@ -15306,20 +15305,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-resources-workload.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-resources-workload.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-resources-workload
+  name: prometheus-prometheus-oper-k8s-resources-workload
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-resources-workload.json: |-
@@ -17335,20 +17334,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/k8s-resources-workloads-namespace.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/k8s-resources-workloads-namespace.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-k8s-resources-workloads-namespace
+  name: prometheus-prometheus-oper-k8s-resources-workloads-namespace
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   k8s-resources-workloads-namespace.json: |-
@@ -19525,20 +19524,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/kubelet.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/kubelet.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-kubelet
+  name: prometheus-prometheus-oper-kubelet
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   kubelet.json: |-
@@ -22035,20 +22034,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/namespace-by-pod.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/namespace-by-pod.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-namespace-by-pod
+  name: prometheus-prometheus-oper-namespace-by-pod
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   namespace-by-pod.json: |-
@@ -23459,20 +23458,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/namespace-by-workload.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/namespace-by-workload.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-namespace-by-workload
+  name: prometheus-prometheus-oper-namespace-by-workload
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   namespace-by-workload.json: |-
@@ -25151,20 +25150,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/node-cluster-rsrc-use.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/node-cluster-rsrc-use.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-node-cluster-rsrc-use
+  name: prometheus-prometheus-oper-node-cluster-rsrc-use
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   node-cluster-rsrc-use.json: |-
@@ -26110,20 +26109,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/node-rsrc-use.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/node-rsrc-use.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-node-rsrc-use
+  name: prometheus-prometheus-oper-node-rsrc-use
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   node-rsrc-use.json: |-
@@ -27096,20 +27095,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/nodes.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/nodes.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-nodes
+  name: prometheus-prometheus-oper-nodes
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   nodes.json: |-
@@ -28085,20 +28084,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/persistentvolumesusage.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/persistentvolumesusage.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-persistentvolumesusage
+  name: prometheus-prometheus-oper-persistentvolumesusage
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   persistentvolumesusage.json: |-
@@ -28655,20 +28654,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/pod-total.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/pod-total.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-pod-total
+  name: prometheus-prometheus-oper-pod-total
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   pod-total.json: |-
@@ -29846,20 +29845,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/prometheus.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/prometheus.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   prometheus.json: |-
@@ -31068,20 +31067,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/proxy.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/proxy.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-proxy
+  name: prometheus-prometheus-oper-proxy
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   proxy.json: |-
@@ -32284,20 +32283,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/scheduler.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/scheduler.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-scheduler
+  name: prometheus-prometheus-oper-scheduler
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   scheduler.json: |-
@@ -33345,20 +33344,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/statefulset.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/statefulset.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-statefulset
+  name: prometheus-prometheus-oper-statefulset
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   statefulset.json: |-
@@ -34267,20 +34266,20 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/templates/grafana/dashboards-1.14/workload-total.yaml
+# Source: prometheus-operator/templates/grafana/dashboards-1.14/workload-total.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: monitoring
-  name: kube-prometheus-stack-1600-workload-total
+  name: prometheus-prometheus-oper-workload-total
   annotations:
     {}
   labels:
     grafana_dashboard: "1"
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 data:
   workload-total.json: |-
@@ -35664,32 +35663,32 @@ data:
         "version": 0
     }
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/clusterrole.yaml
+# Source: prometheus-operator/charts/grafana/templates/clusterrole.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
-  name: kube-prometheus-stack-1600767579-grafana-clusterrole
+  name: prometheus-grafana-clusterrole
 rules:
 - apiGroups: [""] # "" indicates the core API group
   resources: ["configmaps", "secrets"]
   verbs: ["get", "watch", "list"]
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/clusterrole.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.8.14
+    helm.sh/chart: kube-state-metrics-2.8.10
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+    app.kubernetes.io/instance: prometheus
+  name: prometheus-kube-state-metrics
 rules:
 
 - apiGroups: ["certificates.k8s.io"]
@@ -35827,51 +35826,51 @@ rules:
     - volumeattachments
   verbs: ["list", "watch"]
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/psp-clusterrole.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/psp-clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.8.14
+    helm.sh/chart: kube-state-metrics-2.8.10
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-  name: psp-kube-prometheus-stack-1600767579-kube-state-metrics
+    app.kubernetes.io/instance: prometheus
+  name: psp-prometheus-kube-state-metrics
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - kube-prometheus-stack-1600767579-kube-state-metrics
+  - prometheus-kube-state-metrics
 ---
-# Source: kube-prometheus-stack/charts/prometheus-node-exporter/templates/psp-clusterrole.yaml
+# Source: prometheus-operator/charts/prometheus-node-exporter/templates/psp-clusterrole.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: psp-kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: psp-prometheus-prometheus-node-exporter
   labels:     
     app: prometheus-node-exporter
     heritage: Helm
-    release: kube-prometheus-stack-1600767579
-    chart: prometheus-node-exporter-1.11.2
+    release: prometheus
+    chart: prometheus-node-exporter-1.10.0
     jobLabel: node-exporter
 rules:
 - apiGroups: ['extensions']
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - kube-prometheus-stack-1600767579-prometheus-node-exporter
+  - prometheus-prometheus-node-exporter
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/clusterrole.yaml
+# Source: prometheus-operator/templates/prometheus-operator/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 rules:
 - apiGroups:
@@ -35942,34 +35941,34 @@ rules:
   - list
   - watch
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/psp-clusterrole.yaml
+# Source: prometheus-operator/templates/prometheus-operator/psp-clusterrole.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kube-prometheus-stack-1600-operator-psp
+  name: prometheus-prometheus-oper-operator-psp
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - kube-prometheus-stack-1600-operator
+  - prometheus-prometheus-oper-operator
 ---
-# Source: kube-prometheus-stack/templates/prometheus/clusterrole.yaml
+# Source: prometheus-operator/templates/prometheus/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 rules:
 - apiGroups:
@@ -35980,7 +35979,7 @@ rules:
   - get
   - list
   - watch
-# This permission are not in the kube-prometheus repo
+# This permission are not in the prometheus-operator repo
 # they're grabbed from https://github.com/prometheus/prometheus/blob/master/documentation/examples/rbac-setup.yml
 - apiGroups: [""]
   resources:
@@ -35999,311 +35998,311 @@ rules:
 - nonResourceURLs: ["/metrics"]
   verbs: ["get"]
 ---
-# Source: kube-prometheus-stack/templates/prometheus/psp-clusterrole.yaml
+# Source: prometheus-operator/templates/prometheus/psp-clusterrole.yaml
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kube-prometheus-stack-1600-prometheus-psp
+  name: prometheus-prometheus-oper-prometheus-psp
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - kube-prometheus-stack-1600-prometheus
+  - prometheus-prometheus-oper-prometheus
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/clusterrolebinding.yaml
+# Source: prometheus-operator/charts/grafana/templates/clusterrolebinding.yaml
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana-clusterrolebinding
+  name: prometheus-grafana-clusterrolebinding
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600767579-grafana
+    name: prometheus-grafana
     namespace: monitoring
 roleRef:
   kind: ClusterRole
-  name: kube-prometheus-stack-1600767579-grafana-clusterrole
+  name: prometheus-grafana-clusterrole
   apiGroup: rbac.authorization.k8s.io
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/clusterrolebinding.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.8.14
+    helm.sh/chart: kube-state-metrics-2.8.10
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+    app.kubernetes.io/instance: prometheus
+  name: prometheus-kube-state-metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+  name: prometheus-kube-state-metrics
 subjects:
 - kind: ServiceAccount
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+  name: prometheus-kube-state-metrics
   namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/psp-clusterrolebinding.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/psp-clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: kube-state-metrics-2.8.14
+    helm.sh/chart: kube-state-metrics-2.8.10
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-  name: psp-kube-prometheus-stack-1600767579-kube-state-metrics
+    app.kubernetes.io/instance: prometheus
+  name: psp-prometheus-kube-state-metrics
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: psp-kube-prometheus-stack-1600767579-kube-state-metrics
+  name: psp-prometheus-kube-state-metrics
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600767579-kube-state-metrics
+    name: prometheus-kube-state-metrics
     namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/prometheus-node-exporter/templates/psp-clusterrolebinding.yaml
+# Source: prometheus-operator/charts/prometheus-node-exporter/templates/psp-clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: psp-kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: psp-prometheus-prometheus-node-exporter
   labels:     
     app: prometheus-node-exporter
     heritage: Helm
-    release: kube-prometheus-stack-1600767579
-    chart: prometheus-node-exporter-1.11.2
+    release: prometheus
+    chart: prometheus-node-exporter-1.10.0
     jobLabel: node-exporter
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: psp-kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: psp-prometheus-prometheus-node-exporter
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600767579-prometheus-node-exporter
+    name: prometheus-prometheus-node-exporter
     namespace: monitoring
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/clusterrolebinding.yaml
+# Source: prometheus-operator/templates/prometheus-operator/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
 subjects:
 - kind: ServiceAccount
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   namespace: monitoring
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/psp-clusterrolebinding.yaml
+# Source: prometheus-operator/templates/prometheus-operator/psp-clusterrolebinding.yaml
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kube-prometheus-stack-1600-operator-psp
+  name: prometheus-prometheus-oper-operator-psp
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kube-prometheus-stack-1600-operator-psp
+  name: prometheus-prometheus-oper-operator-psp
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600-operator
+    name: prometheus-prometheus-oper-operator
     namespace: monitoring
 ---
-# Source: kube-prometheus-stack/templates/prometheus/clusterrolebinding.yaml
+# Source: prometheus-operator/templates/prometheus/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600-prometheus
+    name: prometheus-prometheus-oper-prometheus
     namespace: monitoring
 ---
-# Source: kube-prometheus-stack/templates/prometheus/psp-clusterrolebinding.yaml
+# Source: prometheus-operator/templates/prometheus/psp-clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kube-prometheus-stack-1600-prometheus-psp
+  name: prometheus-prometheus-oper-prometheus-psp
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kube-prometheus-stack-1600-prometheus-psp
+  name: prometheus-prometheus-oper-prometheus-psp
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600-prometheus
+    name: prometheus-prometheus-oper-prometheus
     namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/role.yaml
+# Source: prometheus-operator/charts/grafana/templates/role.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 rules:
 - apiGroups:      ['extensions']
   resources:      ['podsecuritypolicies']
   verbs:          ['use']
-  resourceNames:  [kube-prometheus-stack-1600767579-grafana]
+  resourceNames:  [prometheus-grafana]
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/tests/test-role.yaml
+# Source: prometheus-operator/charts/grafana/templates/tests/test-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 rules:
 - apiGroups:      ['policy']
   resources:      ['podsecuritypolicies']
   verbs:          ['use']
-  resourceNames:  [kube-prometheus-stack-1600767579-grafana-test]
+  resourceNames:  [prometheus-grafana-test]
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/psp-role.yaml
+# Source: prometheus-operator/templates/alertmanager/psp-role.yaml
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 rules:
 - apiGroups: ['policy']
   resources: ['podsecuritypolicies']
   verbs:     ['use']
   resourceNames:
-  - kube-prometheus-stack-1600-alertmanager
+  - prometheus-prometheus-oper-alertmanager
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/rolebinding.yaml
+# Source: prometheus-operator/charts/grafana/templates/rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
 subjects:
 - kind: ServiceAccount
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/tests/test-rolebinding.yaml
+# Source: prometheus-operator/charts/grafana/templates/tests/test-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
 subjects:
 - kind: ServiceAccount
-  name: kube-prometheus-stack-1600767579-grafana-test
+  name: prometheus-grafana-test
   namespace: monitoring
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/psp-rolebinding.yaml
+# Source: prometheus-operator/templates/alertmanager/psp-rolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
 subjects:
   - kind: ServiceAccount
-    name: kube-prometheus-stack-1600-alertmanager
+    name: prometheus-prometheus-oper-alertmanager
     namespace: monitoring
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/service.yaml
+# Source: prometheus-operator/charts/grafana/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
@@ -36315,18 +36314,18 @@ spec:
 
   selector:
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
+    app.kubernetes.io/instance: prometheus
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/service.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+  name: prometheus-kube-state-metrics
   namespace: monitoring
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: "kube-state-metrics-2.8.14"
-    app.kubernetes.io/instance: "kube-prometheus-stack-1600767579"
+    helm.sh/chart: "kube-state-metrics-2.8.10"
+    app.kubernetes.io/instance: "prometheus"
     app.kubernetes.io/managed-by: "Helm"
   annotations:
     prometheus.io/scrape: 'true'
@@ -36339,21 +36338,21 @@ spec:
     targetPort: 8080
   selector:
     app.kubernetes.io/name: kube-state-metrics
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
+    app.kubernetes.io/instance: prometheus
 ---
-# Source: kube-prometheus-stack/charts/prometheus-node-exporter/templates/service.yaml
+# Source: prometheus-operator/charts/prometheus-node-exporter/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: prometheus-prometheus-node-exporter
   namespace: monitoring
   annotations:
     prometheus.io/scrape: "true"
   labels:     
     app: prometheus-node-exporter
     heritage: Helm
-    release: kube-prometheus-stack-1600767579
-    chart: prometheus-node-exporter-1.11.2
+    release: prometheus
+    chart: prometheus-node-exporter-1.10.0
     jobLabel: node-exporter
 spec:
   type: ClusterIP
@@ -36364,20 +36363,20 @@ spec:
       name: metrics
   selector:
     app: prometheus-node-exporter
-    release: kube-prometheus-stack-1600767579
+    release: prometheus
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/service.yaml
+# Source: prometheus-operator/templates/alertmanager/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     self-monitor: "true"
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   ports:
@@ -36387,20 +36386,20 @@ spec:
       protocol: TCP
   selector:
     app: alertmanager
-    alertmanager: kube-prometheus-stack-1600-alertmanager
+    alertmanager: prometheus-prometheus-oper-alertmanager
   type: "ClusterIP"
 ---
-# Source: kube-prometheus-stack/templates/exporters/core-dns/service.yaml
+# Source: prometheus-operator/templates/exporters/core-dns/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-coredns
+  name: prometheus-prometheus-oper-coredns
   labels:
-    app: kube-prometheus-stack-coredns
+    app: prometheus-operator-coredns
     jobLabel: coredns
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
   namespace: kube-system
 spec:
@@ -36413,17 +36412,17 @@ spec:
   selector:
     k8s-app: kube-dns
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-controller-manager/service.yaml
+# Source: prometheus-operator/templates/exporters/kube-controller-manager/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-kube-controller-manager
+  name: prometheus-prometheus-oper-kube-controller-manager
   labels:
-    app: kube-prometheus-stack-kube-controller-manager
+    app: prometheus-operator-kube-controller-manager
     jobLabel: kube-controller-manager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
   namespace: kube-system
 spec:
@@ -36437,17 +36436,17 @@ spec:
     component: kube-controller-manager
   type: ClusterIP
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-etcd/service.yaml
+# Source: prometheus-operator/templates/exporters/kube-etcd/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-kube-etcd
+  name: prometheus-prometheus-oper-kube-etcd
   labels:
-    app: kube-prometheus-stack-kube-etcd
+    app: prometheus-operator-kube-etcd
     jobLabel: kube-etcd
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
   namespace: kube-system
 spec:
@@ -36461,17 +36460,17 @@ spec:
     component: etcd
   type: ClusterIP
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-proxy/service.yaml
+# Source: prometheus-operator/templates/exporters/kube-proxy/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-kube-proxy
+  name: prometheus-prometheus-oper-kube-proxy
   labels:
-    app: kube-prometheus-stack-kube-proxy
+    app: prometheus-operator-kube-proxy
     jobLabel: kube-proxy
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
   namespace: kube-system
 spec:
@@ -36485,17 +36484,17 @@ spec:
     k8s-app: kube-proxy
   type: ClusterIP
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-scheduler/service.yaml
+# Source: prometheus-operator/templates/exporters/kube-scheduler/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-kube-scheduler
+  name: prometheus-prometheus-oper-kube-scheduler
   labels:
-    app: kube-prometheus-stack-kube-scheduler
+    app: prometheus-operator-kube-scheduler
     jobLabel: kube-scheduler
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
   namespace: kube-system
 spec:
@@ -36509,17 +36508,17 @@ spec:
     component: kube-scheduler
   type: ClusterIP
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/service.yaml
+# Source: prometheus-operator/templates/prometheus-operator/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   ports:
@@ -36530,22 +36529,22 @@ spec:
     port: 443
     targetPort: https
   selector:
-    app: kube-prometheus-stack-operator
-    release: "kube-prometheus-stack-1600767579"
+    app: prometheus-operator-operator
+    release: "prometheus"
   type: "ClusterIP"
 ---
-# Source: kube-prometheus-stack/templates/prometheus/service.yaml
+# Source: prometheus-operator/templates/prometheus/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     self-monitor: "true"
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   ports:
@@ -36554,26 +36553,26 @@ spec:
     targetPort: 9090
   selector:
     app: prometheus
-    prometheus: kube-prometheus-stack-1600-prometheus
+    prometheus: prometheus-prometheus-oper-prometheus
   type: "ClusterIP"
 ---
-# Source: kube-prometheus-stack/charts/prometheus-node-exporter/templates/daemonset.yaml
+# Source: prometheus-operator/charts/prometheus-node-exporter/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: kube-prometheus-stack-1600767579-prometheus-node-exporter
+  name: prometheus-prometheus-node-exporter
   namespace: monitoring
   labels:     
     app: prometheus-node-exporter
     heritage: Helm
-    release: kube-prometheus-stack-1600767579
-    chart: prometheus-node-exporter-1.11.2
+    release: prometheus
+    chart: prometheus-node-exporter-1.10.0
     jobLabel: node-exporter
 spec:
   selector:
     matchLabels:
       app: prometheus-node-exporter
-      release: kube-prometheus-stack-1600767579
+      release: prometheus
   updateStrategy:
     rollingUpdate:
       maxUnavailable: 1
@@ -36583,11 +36582,11 @@ spec:
       labels:         
         app: prometheus-node-exporter
         heritage: Helm
-        release: kube-prometheus-stack-1600767579
-        chart: prometheus-node-exporter-1.11.2
+        release: prometheus
+        chart: prometheus-node-exporter-1.10.0
         jobLabel: node-exporter
     spec:
-      serviceAccountName: kube-prometheus-stack-1600767579-prometheus-node-exporter
+      serviceAccountName: prometheus-prometheus-node-exporter
       securityContext:
         fsGroup: 65534
         runAsGroup: 65534
@@ -36595,7 +36594,7 @@ spec:
         runAsUser: 65534
       containers:
         - name: node-exporter
-          image: "quay.io/prometheus/node-exporter:v1.0.1"
+          image: "quay.io/prometheus/node-exporter:v1.0.0"
           imagePullPolicy: IfNotPresent
           args:
             - --path.procfs=/host/proc
@@ -36640,39 +36639,39 @@ spec:
           hostPath:
             path: /sys
 ---
-# Source: kube-prometheus-stack/charts/grafana/templates/deployment.yaml
+# Source: prometheus-operator/charts/grafana/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kube-prometheus-stack-1600767579-grafana
+  name: prometheus-grafana
   namespace: monitoring
   labels:
-    helm.sh/chart: grafana-5.6.5
+    helm.sh/chart: grafana-5.3.0
     app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: kube-prometheus-stack-1600767579
-    app.kubernetes.io/version: "7.1.5"
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/version: "7.0.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: grafana
-      app.kubernetes.io/instance: kube-prometheus-stack-1600767579
+      app.kubernetes.io/instance: prometheus
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
         app.kubernetes.io/name: grafana
-        app.kubernetes.io/instance: kube-prometheus-stack-1600767579
+        app.kubernetes.io/instance: prometheus
       annotations:
-        checksum/config: c510ecea636396e19a4991e05632ef8f16d2f581246f33b45e58c9073723a935
+        checksum/config: c5905ad512d7d8cf355829c4196f31059495e3ac9055f0ecb85e5b7d907f1d7d
         checksum/dashboards-json-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
-        checksum/sc-dashboard-provider-config: 69b545141b4fb1ba351d6a85cb5132ddc479f044a829f08f9c0619f0ed2fd0fb
-        checksum/secret: 56f1d53eb8a8611b853383a48f7d87bb6232f5c650086b32ad559f4e5d2d9a23
+        checksum/sc-dashboard-provider-config: 9b67cfb2cfe7008e5cd59043598febba2bd1103fba23a275b8366e63833c2667
+        checksum/secret: d37ef870dd03db8b0f4ef445914bbbd815fbe360aeaac6b0e836a07ca038290d
     spec:
       
-      serviceAccountName: kube-prometheus-stack-1600767579-grafana
+      serviceAccountName: prometheus-grafana
       securityContext:
         fsGroup: 472
         runAsGroup: 472
@@ -36714,7 +36713,7 @@ spec:
             - name: sc-dashboard-volume
               mountPath: "/tmp/dashboards"
         - name: grafana
-          image: "grafana/grafana:7.1.5"
+          image: "grafana/grafana:7.0.3"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: config
@@ -36741,12 +36740,12 @@ spec:
             - name: GF_SECURITY_ADMIN_USER
               valueFrom:
                 secretKeyRef:
-                  name: kube-prometheus-stack-1600767579-grafana
+                  name: prometheus-grafana
                   key: admin-user
             - name: GF_SECURITY_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: kube-prometheus-stack-1600767579-grafana
+                  name: prometheus-grafana
                   key: admin-password
           livenessProbe:
             failureThreshold: 10
@@ -36764,27 +36763,27 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: kube-prometheus-stack-1600767579-grafana
+            name: prometheus-grafana
         - name: storage
           emptyDir: {}
         - name: sc-dashboard-volume
           emptyDir: {}
         - name: sc-dashboard-provider
           configMap:
-            name: kube-prometheus-stack-1600767579-grafana-config-dashboards
+            name: prometheus-grafana-config-dashboards
         - name: sc-datasources-volume
           emptyDir: {}
 ---
-# Source: kube-prometheus-stack/charts/kube-state-metrics/templates/deployment.yaml
+# Source: prometheus-operator/charts/kube-state-metrics/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kube-prometheus-stack-1600767579-kube-state-metrics
+  name: prometheus-kube-state-metrics
   namespace: monitoring
   labels:
     app.kubernetes.io/name: kube-state-metrics
-    helm.sh/chart: "kube-state-metrics-2.8.14"
-    app.kubernetes.io/instance: "kube-prometheus-stack-1600767579"
+    helm.sh/chart: "kube-state-metrics-2.8.10"
+    app.kubernetes.io/instance: "prometheus"
     app.kubernetes.io/managed-by: "Helm"
 spec:
   selector:
@@ -36795,10 +36794,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: kube-state-metrics
-        app.kubernetes.io/instance: "kube-prometheus-stack-1600767579"
+        app.kubernetes.io/instance: "prometheus"
     spec:
       hostNetwork: false
-      serviceAccountName: kube-prometheus-stack-1600767579-kube-state-metrics
+      serviceAccountName: prometheus-kube-state-metrics
       securityContext:
         fsGroup: 65534
         runAsGroup: 65534
@@ -36907,40 +36906,40 @@ spec:
           initialDelaySeconds: 5
           timeoutSeconds: 5
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/deployment.yaml
+# Source: prometheus-operator/templates/prometheus-operator/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kube-prometheus-stack-operator
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-operator
+      release: "prometheus"
   template:
     metadata:
       labels:
-        app: kube-prometheus-stack-operator
+        app: prometheus-operator-operator
         
-        chart: kube-prometheus-stack-9.4.3
-        release: "kube-prometheus-stack-1600767579"
+        chart: prometheus-operator-9.3.2
+        release: "prometheus"
         heritage: "Helm"
     spec:
       containers:
-        - name: kube-prometheus-stack
+        - name: prometheus-operator
           image: "quay.io/coreos/prometheus-operator:v0.38.1"
           imagePullPolicy: "IfNotPresent"
           args:
             - --manage-crds=true
-            - --kubelet-service=kube-system/kube-prometheus-stack-1600-kubelet
+            - --kubelet-service=kube-system/prometheus-prometheus-oper-kubelet
             - --logtostderr=true
             - --localhost=127.0.0.1
             - --prometheus-config-reloader=quay.io/coreos/prometheus-config-reloader:v0.38.1
@@ -36981,33 +36980,33 @@ spec:
         - name: tls-proxy-secret
           secret:
             defaultMode: 420
-            secretName: kube-prometheus-stack-1600-admission
+            secretName: prometheus-prometheus-oper-admission
       securityContext:
         fsGroup: 65534
         runAsGroup: 65534
         runAsNonRoot: true
         runAsUser: 65534
-      serviceAccountName: kube-prometheus-stack-1600-operator
+      serviceAccountName: prometheus-prometheus-oper-operator
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/alertmanager.yaml
+# Source: prometheus-operator/templates/alertmanager/alertmanager.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   baseImage: quay.io/prometheus/alertmanager
   version: v0.21.0
   replicas: 1
   listenLocal: false
-  serviceAccountName: kube-prometheus-stack-1600-alertmanager
-  externalUrl: http://kube-prometheus-stack-1600-alertmanager.monitoring:9093
+  serviceAccountName: prometheus-prometheus-oper-alertmanager
+  externalUrl: http://prometheus-prometheus-oper-alertmanager.monitoring:9093
   paused: false
   logFormat: "logfmt"
   logLevel:  "info"
@@ -37020,15 +37019,15 @@ spec:
     runAsUser: 1000
   portName: web
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/admission-webhooks/mutatingWebhookConfiguration.yaml
+# Source: prometheus-operator/templates/prometheus-operator/admission-webhooks/mutatingWebhookConfiguration.yaml
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
-  name:  kube-prometheus-stack-1600-admission
+  name:  prometheus-prometheus-oper-admission
   labels:
-    app: kube-prometheus-stack-admission    
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    app: prometheus-operator-admission    
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 webhooks:
   - name: prometheusrulemutate.monitoring.coreos.com
@@ -37046,32 +37045,32 @@ webhooks:
     clientConfig:
       service:
         namespace: monitoring
-        name: kube-prometheus-stack-1600-operator
+        name: prometheus-prometheus-oper-operator
         path: /admission-prometheusrules/mutate
 ---
-# Source: kube-prometheus-stack/templates/prometheus/prometheus.yaml
+# Source: prometheus-operator/templates/prometheus/prometheus.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   alerting:
     alertmanagers:
       - namespace: monitoring
-        name: kube-prometheus-stack-1600-alertmanager
+        name: prometheus-prometheus-oper-alertmanager
         port: web
         pathPrefix: "/"
         apiVersion: v2
   baseImage: quay.io/prometheus/prometheus
   version: v2.18.2
-  externalUrl: http://kube-prometheus-stack-1600-prometheus.monitoring:9090
+  externalUrl: http://prometheus-prometheus-oper-prometheus.monitoring:9090
   paused: false
   replicas: 1
   logLevel:  info
@@ -37080,15 +37079,15 @@ spec:
   enableAdminAPI: false
   retention: "10d"
   routePrefix: "/"
-  serviceAccountName: kube-prometheus-stack-1600-prometheus
+  serviceAccountName: prometheus-prometheus-oper-prometheus
   serviceMonitorSelector:
     matchLabels:
-      release: "kube-prometheus-stack-1600767579"
+      release: "prometheus"
 
   serviceMonitorNamespaceSelector: {}
   podMonitorSelector:
     matchLabels:
-      release: "kube-prometheus-stack-1600767579"
+      release: "prometheus"
 
   podMonitorNamespaceSelector: {}
   securityContext:
@@ -37099,22 +37098,22 @@ spec:
   ruleNamespaceSelector: {}
   ruleSelector:
     matchLabels:
-      app: kube-prometheus-stack
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator
+      release: "prometheus"
 
   portName: web
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/alertmanager.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/alertmanager.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager.rules
+  name: prometheus-prometheus-oper-alertmanager.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -37131,14 +37130,14 @@ spec:
           {{ end }}
 
           '
-      expr: count by(namespace,service) (count_values by(namespace,service) ("config_hash", alertmanager_config_hash{job="kube-prometheus-stack-1600-alertmanager",namespace="monitoring"})) != 1
+      expr: count by(namespace,service) (count_values by(namespace,service) ("config_hash", alertmanager_config_hash{job="prometheus-prometheus-oper-alertmanager",namespace="monitoring"})) != 1
       for: 5m
       labels:
         severity: critical
     - alert: AlertmanagerFailedReload
       annotations:
         message: Reloading Alertmanager's configuration has failed for {{ $labels.namespace }}/{{ $labels.pod}}.
-      expr: alertmanager_config_last_reload_successful{job="kube-prometheus-stack-1600-alertmanager",namespace="monitoring"} == 0
+      expr: alertmanager_config_last_reload_successful{job="prometheus-prometheus-oper-alertmanager",namespace="monitoring"} == 0
       for: 10m
       labels:
         severity: warning
@@ -37146,24 +37145,24 @@ spec:
       annotations:
         message: Alertmanager has not found all other members of the cluster.
       expr: |-
-        alertmanager_cluster_members{job="kube-prometheus-stack-1600-alertmanager",namespace="monitoring"}
+        alertmanager_cluster_members{job="prometheus-prometheus-oper-alertmanager",namespace="monitoring"}
           != on (service) GROUP_LEFT()
-        count by (service) (alertmanager_cluster_members{job="kube-prometheus-stack-1600-alertmanager",namespace="monitoring"})
+        count by (service) (alertmanager_cluster_members{job="prometheus-prometheus-oper-alertmanager",namespace="monitoring"})
       for: 5m
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/etcd.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/etcd.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-etcd
+  name: prometheus-prometheus-oper-etcd
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -37298,17 +37297,17 @@ spec:
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/general.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/general.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-general.rules
+  name: prometheus-prometheus-oper-general.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -37338,17 +37337,17 @@ spec:
       labels:
         severity: none
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/k8s.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-k8s.rules
+  name: prometheus-prometheus-oper-k8s.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -37449,17 +37448,17 @@ spec:
         workload_type: statefulset
       record: namespace_workload_pod:kube_pod_owner:relabel
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver-availability.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-apiserver-availability.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-apiserver-availability.rules
+  name: prometheus-prometheus-oper-kube-apiserver-availability.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -37597,17 +37596,17 @@ spec:
         verb: write
       record: code:apiserver_request_total:increase30d
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver-slos.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-apiserver-slos.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-apiserver-slos
+  name: prometheus-prometheus-oper-kube-apiserver-slos
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -37666,17 +37665,17 @@ spec:
         severity: warning
         short: 6h
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-apiserver.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-apiserver.rules
+  name: prometheus-prometheus-oper-kube-apiserver.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38019,17 +38018,17 @@ spec:
         quantile: '0.5'
       record: cluster_quantile:apiserver_request_duration_seconds:histogram_quantile
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-prometheus-general.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-prometheus-general.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-prometheus-general.rules
+  name: prometheus-prometheus-oper-kube-prometheus-general.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38040,17 +38039,17 @@ spec:
     - expr: count without(instance, pod, node) (up == 0)
       record: count:up0
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-prometheus-node-recording.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-prometheus-node-recording.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-prometheus-node-recording.rules
+  name: prometheus-prometheus-oper-kube-prometheus-node-recording.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38069,17 +38068,17 @@ spec:
     - expr: cluster:node_cpu_seconds_total:rate5m / count(sum(node_cpu_seconds_total) BY (instance, cpu))
       record: cluster:node_cpu:ratio
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-scheduler.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-scheduler.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-scheduler.rules
+  name: prometheus-prometheus-oper-kube-scheduler.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38122,17 +38121,17 @@ spec:
         quantile: '0.5'
       record: cluster_quantile:scheduler_binding_duration_seconds:histogram_quantile
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-state-metrics.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kube-state-metrics.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-state-metrics
+  name: prometheus-prometheus-oper-kube-state-metrics
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38163,17 +38162,17 @@ spec:
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubelet.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubelet.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubelet.rules
+  name: prometheus-prometheus-oper-kubelet.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38192,17 +38191,17 @@ spec:
         quantile: '0.5'
       record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-apps.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-apps.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-apps
+  name: prometheus-prometheus-oper-kubernetes-apps
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38391,17 +38390,17 @@ spec:
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-resources.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-resources.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-resources
+  name: prometheus-prometheus-oper-kubernetes-resources
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38484,17 +38483,17 @@ spec:
       labels:
         severity: info
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-storage.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-storage.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-storage
+  name: prometheus-prometheus-oper-kubernetes-storage
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38536,17 +38535,17 @@ spec:
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-apiserver.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-system-apiserver.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-system-apiserver
+  name: prometheus-prometheus-oper-kubernetes-system-apiserver
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38590,17 +38589,17 @@ spec:
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-controller-manager.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-system-controller-manager.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-system-controller-manager
+  name: prometheus-prometheus-oper-kubernetes-system-controller-manager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38615,17 +38614,17 @@ spec:
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-kubelet.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-system-kubelet.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-system-kubelet
+  name: prometheus-prometheus-oper-kubernetes-system-kubelet
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38694,17 +38693,17 @@ spec:
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-scheduler.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-system-scheduler.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-system-scheduler
+  name: prometheus-prometheus-oper-kubernetes-system-scheduler
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38719,17 +38718,17 @@ spec:
       labels:
         severity: critical
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/kubernetes-system.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kubernetes-system
+  name: prometheus-prometheus-oper-kubernetes-system
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38756,17 +38755,17 @@ spec:
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node-exporter.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/node-exporter.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-node-exporter.rules
+  name: prometheus-prometheus-oper-node-exporter.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -38825,17 +38824,17 @@ spec:
         )
       record: instance:node_network_transmit_drop_excluding_lo:rate1m
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node-exporter.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/node-exporter.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-node-exporter
+  name: prometheus-prometheus-oper-node-exporter
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -39025,17 +39024,17 @@ spec:
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node-network.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/node-network.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-node-network
+  name: prometheus-prometheus-oper-node-network
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -39049,17 +39048,17 @@ spec:
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node.rules.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/node.rules.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-node.rules
+  name: prometheus-prometheus-oper-node.rules
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -39092,17 +39091,17 @@ spec:
         ) by (cluster)
       record: :node_memory_MemAvailable_bytes:sum
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/prometheus-operator.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/prometheus-operator.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-kube-prometheus
+  name: prometheus-prometheus-oper-prometheus-operator
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -39111,43 +39110,43 @@ spec:
     - alert: PrometheusOperatorListErrors
       annotations:
         message: Errors while performing List operations in controller {{$labels.controller}} in {{$labels.namespace}} namespace.
-      expr: (sum by (controller,namespace) (rate(prometheus_operator_list_operations_failed_total{job="kube-prometheus-stack-1600-operator",namespace="monitoring"}[1h])) / sum by (controller,namespace) (rate(prometheus_operator_list_operations_total{job="kube-prometheus-stack-1600-operator",namespace="monitoring"}[1h]))) > 0.4
+      expr: (sum by (controller,namespace) (rate(prometheus_operator_list_operations_failed_total{job="prometheus-prometheus-oper-operator",namespace="monitoring"}[1h])) / sum by (controller,namespace) (rate(prometheus_operator_list_operations_total{job="prometheus-prometheus-oper-operator",namespace="monitoring"}[1h]))) > 0.4
       for: 15m
       labels:
         severity: warning
     - alert: PrometheusOperatorWatchErrors
       annotations:
         message: Errors while performing Watch operations in controller {{$labels.controller}} in {{$labels.namespace}} namespace.
-      expr: (sum by (controller,namespace) (rate(prometheus_operator_watch_operations_failed_total{job="kube-prometheus-stack-1600-operator",namespace="monitoring"}[1h])) / sum by (controller,namespace) (rate(prometheus_operator_watch_operations_total{job="kube-prometheus-stack-1600-operator",namespace="monitoring"}[1h]))) > 0.4
+      expr: (sum by (controller,namespace) (rate(prometheus_operator_watch_operations_failed_total{job="prometheus-prometheus-oper-operator",namespace="monitoring"}[1h])) / sum by (controller,namespace) (rate(prometheus_operator_watch_operations_total{job="prometheus-prometheus-oper-operator",namespace="monitoring"}[1h]))) > 0.4
       for: 15m
       labels:
         severity: warning
     - alert: PrometheusOperatorReconcileErrors
       annotations:
         message: Errors while reconciling {{ $labels.controller }} in {{ $labels.namespace }} Namespace.
-      expr: rate(prometheus_operator_reconcile_errors_total{job="kube-prometheus-stack-1600-operator",namespace="monitoring"}[5m]) > 0.1
+      expr: rate(prometheus_operator_reconcile_errors_total{job="prometheus-prometheus-oper-operator",namespace="monitoring"}[5m]) > 0.1
       for: 10m
       labels:
         severity: warning
     - alert: PrometheusOperatorNodeLookupErrors
       annotations:
         message: Errors while reconciling Prometheus in {{ $labels.namespace }} Namespace.
-      expr: rate(prometheus_operator_node_address_lookup_errors_total{job="kube-prometheus-stack-1600-operator",namespace="monitoring"}[5m]) > 0.1
+      expr: rate(prometheus_operator_node_address_lookup_errors_total{job="prometheus-prometheus-oper-operator",namespace="monitoring"}[5m]) > 0.1
       for: 10m
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/prometheus/rules-1.14/prometheus.yaml
+# Source: prometheus-operator/templates/prometheus/rules-1.14/prometheus.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack
+    app: prometheus-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   groups:
@@ -39160,7 +39159,7 @@ spec:
       expr: |-
         # Without max_over_time, failed scrapes could create false negatives, see
         # https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.
-        max_over_time(prometheus_config_last_reload_successful{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) == 0
+        max_over_time(prometheus_config_last_reload_successful{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) == 0
       for: 10m
       labels:
         severity: critical
@@ -39172,9 +39171,9 @@ spec:
         # Without min_over_time, failed scrapes could create false negatives, see
         # https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.
         (
-          predict_linear(prometheus_notifications_queue_length{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m], 60 * 30)
+          predict_linear(prometheus_notifications_queue_length{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m], 60 * 30)
         >
-          min_over_time(prometheus_notifications_queue_capacity{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          min_over_time(prometheus_notifications_queue_capacity{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         )
       for: 15m
       labels:
@@ -39185,9 +39184,9 @@ spec:
         summary: Prometheus has encountered more than 1% errors sending alerts to a specific Alertmanager.
       expr: |-
         (
-          rate(prometheus_notifications_errors_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          rate(prometheus_notifications_errors_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         /
-          rate(prometheus_notifications_sent_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          rate(prometheus_notifications_sent_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         )
         * 100
         > 1
@@ -39200,9 +39199,9 @@ spec:
         summary: Prometheus encounters more than 3% errors sending alerts to any Alertmanager.
       expr: |-
         min without(alertmanager) (
-          rate(prometheus_notifications_errors_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          rate(prometheus_notifications_errors_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         /
-          rate(prometheus_notifications_sent_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          rate(prometheus_notifications_sent_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         )
         * 100
         > 3
@@ -39216,7 +39215,7 @@ spec:
       expr: |-
         # Without max_over_time, failed scrapes could create false negatives, see
         # https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.
-        max_over_time(prometheus_notifications_alertmanagers_discovered{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) < 1
+        max_over_time(prometheus_notifications_alertmanagers_discovered{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) < 1
       for: 10m
       labels:
         severity: warning
@@ -39224,7 +39223,7 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has detected {{$value | humanize}} reload failures over the last 3h.
         summary: Prometheus has issues reloading blocks from disk.
-      expr: increase(prometheus_tsdb_reloads_failures_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[3h]) > 0
+      expr: increase(prometheus_tsdb_reloads_failures_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[3h]) > 0
       for: 4h
       labels:
         severity: warning
@@ -39232,7 +39231,7 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has detected {{$value | humanize}} compaction failures over the last 3h.
         summary: Prometheus has issues compacting blocks.
-      expr: increase(prometheus_tsdb_compactions_failed_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[3h]) > 0
+      expr: increase(prometheus_tsdb_compactions_failed_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[3h]) > 0
       for: 4h
       labels:
         severity: warning
@@ -39240,7 +39239,7 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is not ingesting samples.
         summary: Prometheus is not ingesting samples.
-      expr: rate(prometheus_tsdb_head_samples_appended_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) <= 0
+      expr: rate(prometheus_tsdb_head_samples_appended_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) <= 0
       for: 10m
       labels:
         severity: warning
@@ -39248,7 +39247,7 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is dropping {{ printf "%.4g" $value  }} samples/s with different values but duplicated timestamp.
         summary: Prometheus is dropping samples with duplicate timestamps.
-      expr: rate(prometheus_target_scrapes_sample_duplicate_timestamp_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) > 0
+      expr: rate(prometheus_target_scrapes_sample_duplicate_timestamp_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) > 0
       for: 10m
       labels:
         severity: warning
@@ -39256,7 +39255,7 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is dropping {{ printf "%.4g" $value  }} samples/s with timestamps arriving out of order.
         summary: Prometheus drops samples with out-of-order timestamps.
-      expr: rate(prometheus_target_scrapes_sample_out_of_order_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) > 0
+      expr: rate(prometheus_target_scrapes_sample_out_of_order_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) > 0
       for: 10m
       labels:
         severity: warning
@@ -39266,12 +39265,12 @@ spec:
         summary: Prometheus fails to send samples to remote storage.
       expr: |-
         (
-          rate(prometheus_remote_storage_failed_samples_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          rate(prometheus_remote_storage_failed_samples_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         /
           (
-            rate(prometheus_remote_storage_failed_samples_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+            rate(prometheus_remote_storage_failed_samples_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
           +
-            rate(prometheus_remote_storage_succeeded_samples_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+            rate(prometheus_remote_storage_succeeded_samples_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
           )
         )
         * 100
@@ -39287,9 +39286,9 @@ spec:
         # Without max_over_time, failed scrapes could create false negatives, see
         # https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.
         (
-          max_over_time(prometheus_remote_storage_highest_timestamp_in_seconds{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          max_over_time(prometheus_remote_storage_highest_timestamp_in_seconds{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         - on(job, instance) group_right
-          max_over_time(prometheus_remote_storage_queue_highest_sent_timestamp_seconds{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          max_over_time(prometheus_remote_storage_queue_highest_sent_timestamp_seconds{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         )
         > 120
       for: 15m
@@ -39297,15 +39296,15 @@ spec:
         severity: critical
     - alert: PrometheusRemoteWriteDesiredShards
       annotations:
-        description: Prometheus {{$labels.namespace}}/{{$labels.pod}} remote write desired shards calculation wants to run {{ $value }} shards for queue {{ $labels.remote_name}}:{{ $labels.url }}, which is more than the max of {{ printf `prometheus_remote_storage_shards_max{instance="%s",job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}` $labels.instance | query | first | value }}.
+        description: Prometheus {{$labels.namespace}}/{{$labels.pod}} remote write desired shards calculation wants to run {{ $value }} shards for queue {{ $labels.remote_name}}:{{ $labels.url }}, which is more than the max of {{ printf `prometheus_remote_storage_shards_max{instance="%s",job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}` $labels.instance | query | first | value }}.
         summary: Prometheus remote write desired shards calculation wants to run more than configured max shards.
       expr: |-
         # Without max_over_time, failed scrapes could create false negatives, see
         # https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.
         (
-          max_over_time(prometheus_remote_storage_shards_desired{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          max_over_time(prometheus_remote_storage_shards_desired{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         >
-          max_over_time(prometheus_remote_storage_shards_max{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m])
+          max_over_time(prometheus_remote_storage_shards_max{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m])
         )
       for: 15m
       labels:
@@ -39314,7 +39313,7 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has failed to evaluate {{ printf "%.0f" $value }} rules in the last 5m.
         summary: Prometheus is failing rule evaluations.
-      expr: increase(prometheus_rule_evaluation_failures_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) > 0
+      expr: increase(prometheus_rule_evaluation_failures_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) > 0
       for: 15m
       labels:
         severity: critical
@@ -39322,28 +39321,28 @@ spec:
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has missed {{ printf "%.0f" $value }} rule group evaluations in the last 5m.
         summary: Prometheus is missing rule evaluations due to slow rule group evaluation.
-      expr: increase(prometheus_rule_group_iterations_missed_total{job="kube-prometheus-stack-1600-prometheus",namespace="monitoring"}[5m]) > 0
+      expr: increase(prometheus_rule_group_iterations_missed_total{job="prometheus-prometheus-oper-prometheus",namespace="monitoring"}[5m]) > 0
       for: 15m
       labels:
         severity: warning
 ---
-# Source: kube-prometheus-stack/templates/alertmanager/servicemonitor.yaml
+# Source: prometheus-operator/templates/alertmanager/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-alertmanager
+  name: prometheus-prometheus-oper-alertmanager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-alertmanager
+    app: prometheus-operator-alertmanager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   selector:
     matchLabels:
-      app: kube-prometheus-stack-alertmanager
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-alertmanager
+      release: "prometheus"
       self-monitor: "true"
   namespaceSelector:
     matchNames:
@@ -39352,24 +39351,24 @@ spec:
   - port: web
     path: "/metrics"
 ---
-# Source: kube-prometheus-stack/templates/exporters/core-dns/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/core-dns/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-coredns
+  name: prometheus-prometheus-oper-coredns
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-coredns
+    app: prometheus-operator-coredns
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: jobLabel
   selector:
     matchLabels:
-      app: kube-prometheus-stack-coredns
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-coredns
+      release: "prometheus"
   namespaceSelector:
     matchNames:
       - "kube-system"
@@ -39377,17 +39376,17 @@ spec:
   - port: http-metrics
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-api-server/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/kube-api-server/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-apiserver
+  name: prometheus-prometheus-oper-apiserver
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-apiserver
+    app: prometheus-operator-apiserver
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   endpoints:
@@ -39407,24 +39406,24 @@ spec:
       component: apiserver
       provider: kubernetes
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-controller-manager/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/kube-controller-manager/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-kube-controller-manager
+  name: prometheus-prometheus-oper-kube-controller-manager
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-kube-controller-manager
+    app: prometheus-operator-kube-controller-manager
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: jobLabel
   selector:
     matchLabels:
-      app: kube-prometheus-stack-kube-controller-manager
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-kube-controller-manager
+      release: "prometheus"
   namespaceSelector:
     matchNames:
       - "kube-system"
@@ -39432,24 +39431,24 @@ spec:
   - port: http-metrics
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-etcd/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/kube-etcd/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-kube-etcd
+  name: prometheus-prometheus-oper-kube-etcd
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-kube-etcd
+    app: prometheus-operator-kube-etcd
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: jobLabel
   selector:
     matchLabels:
-      app: kube-prometheus-stack-kube-etcd
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-kube-etcd
+      release: "prometheus"
   namespaceSelector:
     matchNames:
       - "kube-system"
@@ -39457,24 +39456,24 @@ spec:
   - port: http-metrics
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-proxy/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/kube-proxy/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-kube-proxy
+  name: prometheus-prometheus-oper-kube-proxy
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-kube-proxy
+    app: prometheus-operator-kube-proxy
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: jobLabel
   selector:
     matchLabels:
-      app: kube-prometheus-stack-kube-proxy
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-kube-proxy
+      release: "prometheus"
   namespaceSelector:
     matchNames:
       - "kube-system"
@@ -39482,24 +39481,24 @@ spec:
   - port: http-metrics
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-scheduler/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/kube-scheduler/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-kube-scheduler
+  name: prometheus-prometheus-oper-kube-scheduler
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-kube-scheduler
+    app: prometheus-operator-kube-scheduler
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: jobLabel
   selector:
     matchLabels:
-      app: kube-prometheus-stack-kube-scheduler
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-kube-scheduler
+      release: "prometheus"
   namespaceSelector:
     matchNames:
       - "kube-system"
@@ -39507,17 +39506,17 @@ spec:
   - port: http-metrics
     bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
 ---
-# Source: kube-prometheus-stack/templates/exporters/kube-state-metrics/serviceMonitor.yaml
+# Source: prometheus-operator/templates/exporters/kube-state-metrics/serviceMonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-kube-state-metrics
+  name: prometheus-prometheus-oper-kube-state-metrics
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-kube-state-metrics
+    app: prometheus-operator-kube-state-metrics
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: app.kubernetes.io/name
@@ -39527,18 +39526,18 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: kube-state-metrics
-      app.kubernetes.io/instance: "kube-prometheus-stack-1600767579"
+      app.kubernetes.io/instance: "prometheus"
 ---
-# Source: kube-prometheus-stack/templates/exporters/kubelet/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/kubelet/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-kubelet
+  name: prometheus-prometheus-oper-kubelet
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-kubelet    
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    app: prometheus-operator-kubelet    
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   endpoints:
@@ -39597,44 +39596,44 @@ spec:
     matchLabels:
       k8s-app: kubelet
 ---
-# Source: kube-prometheus-stack/templates/exporters/node-exporter/servicemonitor.yaml
+# Source: prometheus-operator/templates/exporters/node-exporter/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-node-exporter
+  name: prometheus-prometheus-oper-node-exporter
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-node-exporter
+    app: prometheus-operator-node-exporter
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   jobLabel: jobLabel
   selector:
     matchLabels:
       app: prometheus-node-exporter
-      release: kube-prometheus-stack-1600767579
+      release: prometheus
   endpoints:
   - port: metrics
 ---
-# Source: kube-prometheus-stack/templates/grafana/servicemonitor.yaml
+# Source: prometheus-operator/templates/grafana/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-grafana
+  name: prometheus-prometheus-oper-grafana
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-grafana
+    app: prometheus-operator-grafana
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: grafana
-      app.kubernetes.io/instance: "kube-prometheus-stack-1600767579"
+      app.kubernetes.io/instance: "prometheus"
   namespaceSelector:
     matchNames:
       - "monitoring"
@@ -39642,17 +39641,17 @@ spec:
   - port: service
     path: "/metrics"
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/servicemonitor.yaml
+# Source: prometheus-operator/templates/prometheus-operator/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-operator
+  name: prometheus-prometheus-oper-operator
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-operator
+    app: prometheus-operator-operator
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   endpoints:
@@ -39660,29 +39659,29 @@ spec:
     honorLabels: true
   selector:
     matchLabels:
-      app: kube-prometheus-stack-operator
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-operator
+      release: "prometheus"
   namespaceSelector:
     matchNames:
       - "monitoring"
 ---
-# Source: kube-prometheus-stack/templates/prometheus/servicemonitor.yaml
+# Source: prometheus-operator/templates/prometheus/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-prometheus-stack-1600-prometheus
+  name: prometheus-prometheus-oper-prometheus
   namespace: monitoring
   labels:
-    app: kube-prometheus-stack-prometheus
+    app: prometheus-operator-prometheus
     
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 spec:
   selector:
     matchLabels:
-      app: kube-prometheus-stack-prometheus
-      release: "kube-prometheus-stack-1600767579"
+      app: prometheus-operator-prometheus
+      release: "prometheus"
       self-monitor: "true"
   namespaceSelector:
     matchNames:
@@ -39691,15 +39690,15 @@ spec:
   - port: web
     path: "/metrics"
 ---
-# Source: kube-prometheus-stack/templates/prometheus-operator/admission-webhooks/validatingWebhookConfiguration.yaml
+# Source: prometheus-operator/templates/prometheus-operator/admission-webhooks/validatingWebhookConfiguration.yaml
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name:  kube-prometheus-stack-1600-admission
+  name:  prometheus-prometheus-oper-admission
   labels:
-    app: kube-prometheus-stack-admission    
-    chart: kube-prometheus-stack-9.4.3
-    release: "kube-prometheus-stack-1600767579"
+    app: prometheus-operator-admission    
+    chart: prometheus-operator-9.3.2
+    release: "prometheus"
     heritage: "Helm"
 webhooks:
   - name: prometheusrulemutate.monitoring.coreos.com
@@ -39717,6 +39716,6 @@ webhooks:
     clientConfig:
       service:
         namespace: monitoring
-        name: kube-prometheus-stack-1600-operator
+        name: prometheus-prometheus-oper-operator
         path: /admission-prometheusrules/validate
 
