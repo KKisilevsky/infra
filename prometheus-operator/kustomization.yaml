@@ -1,6 +1,12 @@
 resources:
-    - ./resources
-
+    - ./resources/monitoring.coreos.com_alertmanagers.yaml
+    - ./resources/monitoring.coreos.com_podmonitors.yaml
+    - ./resources/monitoring.coreos.com_prometheuses.yaml
+    - ./resources/monitoring.coreos.com_prometheusrules.yaml
+    - ./resources/monitoring.coreos.com_servicemonitors.yaml
+    - ./resources/monitoring.coreos.com_thanosrulers.yaml
+    - ./resources/monitoring.coreos.com_probes.yaml
+    - ./resources/upstream.yaml
 # patchesJson6902:
 #     - target:
 #         group: batch
