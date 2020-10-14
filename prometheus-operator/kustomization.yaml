@@ -1,11 +1,11 @@
 resources:
-    - ./resources/upstream.yaml
+    - ./resources
 
-patchesJson6902:
-    - target:
-        group: batch
-        version: v1
-        kind: Job
-        name: prometheus-stack-kube-prom-admission-create
-        namespace: prometheus-stack
-      path: no-helm-hooks.json    
+# patchesJson6902:
+#     - target:
+#         group: batch
+#         version: v1
+#         kind: Job
+#         name: prometheus-stack-kube-prom-admission-create
+#         namespace: prometheus-stack
+#       path: no-helm-hooks.json    
