@@ -1,3 +1,3 @@
 resources:
-    - resources/setup
-    - resources/
+    - ./resources/setup
+    - ./resources/
