@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rook-ceph
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/omnidark/infra.git
+    targetRevision: HEAD
+    path: rook-ceph
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: rook-ceph
+  ignoreDifferences:
+  - group: apiextensions.k8s.io
+    jsonPointers:
+    - /status
+    kind: CustomResourceDefinition
