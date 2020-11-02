@@ -1,0 +1,9 @@
+resources:
+    - ./resources/cluster/common.yaml
+    - ./resources/cluster/operator.yaml
+    - ./resources/cluster/cluster.yaml
+    - ./resources/file-systems/cephfs.yaml
+    - ./resources/file-systems/storage-class.yaml
+    # - ./resources/dashboard/ceph-issuer.yaml
+    # - ./resources/dashboard/ceph-certificate.yaml
+    # - ./resources/dashboard/ceph-ingress.yaml

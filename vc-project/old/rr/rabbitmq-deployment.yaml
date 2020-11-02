@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq-container
+        env:
+            - name: RABBITMQ_DEFAULT_USER 
+              value: $(NAMESPACE)-user
+            - name: RABBITMQ_DEFAULT_PASS 
+              value: $(NAMESPACE)-password
+        image: rabbitmq:3
+        ports:
+        - containerPort: 5672
